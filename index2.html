@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Haxby Project</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--stylesheets-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="css/storymap.css">
+	<link rel="stylesheet" href="css/main.css" />
+
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Courgette|Inconsolata|Titillium+Web|Fira+Sans+Condensed" />
+	<!--Bootstrap-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--leaflet-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="js/leaflet-d3.js"></script>
+	<!--side by side comparison-->
+	<script src="js/leaflet-side-by-side.js"></script>
+
+	<!-- mini globle map -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+	<script src="js/globeminimap.js"></script>
+	<script src="js/storymap.js"></script>
+
+	<script src="js/jqcloud.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
+	<div class="container-fluid" >
+		<a class="navbar-brand" href="#">
+			<img src="img/favicon.ico" class="align-top" height="20px" align="left"> &nbsp;
+		</a>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Haxby Project</a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=homepage]').offset().top-$(window).scrollTop()-40);">Home Page</a>
+				</li>
+<!--
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Scene 2</a>
+				</li>
+-->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historical Seafloor Mapping<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1]').offset().top-$(window).scrollTop()-40);">Scene 1</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Scene 2</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3]').offset().top-$(window).scrollTop()-40);">Scene 3</a>
+						</li>
+<!--
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case1]').offset().top-$(window).scrollTop()-40);">Content 2</a>
+						</li>
+-->
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div id="scenes" class="col-sm-6 col-md-4 main">
+
+			<section class="homepage" data-scene="homepage">
+        <h2>Home</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+      </section>
+
+			<section class="scene1" data-scene="scene1">
+        <h2>Scene 1</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+      </section>
+
+			<section class="scene2" data-scene="scene2">
+				<h2>Scene 2</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+
+			<section class="scene3" data-scene="scene3">
+				<h2>Scene 3</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+<!--
+			<section class="scene4" data-scene="map_hex_case1">
+				<h2>Scene 4</h2>
+      </section>
+-->
+		</div>
+		<div id="map" class="col-sm-6 col-md-8 sidebar"></div>
+	</div>
+	<i class="animated zoomIn infinite glyphicon glyphicon-menu-down arrow-down arrow-down-custom2"></i>
+	<div class="progress-line"></div>
+	<ul class="navwidget text-center"></ul>
+
+</div>
+
+<script type="text/javascript">
+
+		var Esri_WorldTerrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+			maxZoom: 13
+		});
+		var mauryLayer = L.tileLayer('maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		var andreeLayer = L.tileLayer('andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		var tharpLayer = L.tileLayer('heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+    var gmrtLayer = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+
+/*
+		var baseMaps = {
+      "Heezen-Tharp, 1977": tharpLayer,
+      "Contemporary GMRT": gmrtLayer
+    };
+*/
+    var layers = {
+			'esriTerrain' : [Esri_WorldTerrain],
+			'mauryLayer' : [mauryLayer],
+			'andreeLayer' : [andreeLayer],
+			'tharpLayer' : [tharpLayer],
+			'gmrtLayer' : [gmrtLayer]
+    };
+
+    var scenes = {
+			homepage: {lat: 28.5, lng: -36, zoom: 4, layers: ['esriTerrain'], name: "homepage"},
+			scene1: {lat: 28.5, lng: -36, zoom: 4, layers: ['mauryLayer', 'andreeLayer'], name: "scene 1"},
+      scene2: {lat: 28.5, lng:-36, zoom: 4, layers: ['andreeLayer', 'tharpLayer'], name: "scene 2"},
+			scene3: {lat: 28.5, lng:-36, zoom: 4, layers: ['tharpLayer', 'gmrtLayer'], name: "scene 3"}
+    };
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers:layers,
+        legend: false,
+        scale:false,
+        navwidget: true,
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map('map', {zoomControl: false, dragging: true, scrollWheelZoom: true, maxZoom: 14}).setView([44.1347254, -122.7411479], 7);
+            map.doubleClickZoom.disable();
+/*
+						const layerControl = L.control.layers(baseMaps, null, {
+							collapsed: false,
+						});
+*/
+						const layerControl1 = L.control.sideBySide(mauryLayer, andreeLayer).setLeftLayers(mauryLayer);
+						const layerControl2 = L.control.sideBySide(andreeLayer, tharpLayer).setLeftLayers(andreeLayer);
+						const layerControl3 = L.control.sideBySide(tharpLayer, gmrtLayer).setLeftLayers(tharpLayer);
+
+						const homepage = document.querySelector('.homepage');
+						const scene1 = document.querySelector('.scene1');
+						const scene2 = document.querySelector('.scene2');
+						const scene3 = document.querySelector('.scene3');
+
+						document.addEventListener('scroll', function () {
+						//map.on('moveend', function () {
+							console.log('You are scrolling!');
+							if (elementInViewport(homepage)) {
+								console.log('Homepage is in view.');
+							}
+							if (elementInViewport(scene1)) {
+								console.log('Scene 1 is in view.');
+							}
+							if (elementInViewport(scene2)) {
+								console.log('Scene 2 is in view.');
+							}
+							if (elementInViewport(scene3)) {
+								console.log('Scene 3 is in view.');
+							}
+							if (elementInViewport(homepage)) {
+								console.log('Homepage is in view.');
+								map.removeControl(layerControl1);
+								map.removeControl(layerControl2);
+								map.removeControl(layerControl3);
+							}
+							if (elementInViewport(scene1) && !elementInViewport(homepage) || elementInViewport(scene1) && elementInViewport(scene2)) {
+								map.addControl(layerControl1);
+								map.removeControl(layerControl2);
+								map.removeControl(layerControl3);
+							}
+							if (elementInViewport(scene2) && !elementInViewport(scene1) || elementInViewport(scene2) && elementInViewport(scene3)) {
+								map.addControl(layerControl2);
+								map.removeControl(layerControl1);
+								map.removeControl(layerControl3);
+							}
+							if (elementInViewport(scene3) && !elementInViewport(scene2)) {
+								map.addControl(layerControl3);
+								map.removeControl(layerControl1);
+								map.removeControl(layerControl2);
+							}
+						});
+
+						//map.on('moveend', function () {});
+
+            miniMap = new L.Control.GlobeMiniMap({
+                marker:'#B51E1E',
+                position: 'bottomright'
+            }).addTo(map);
+
+            document.getElementsByClassName("leaflet-control-attribution")[0].style.visibility = "hidden";
+            return map;
+
+        }
+    });
+
+		// Need to edit this function to check if the element is visible inside its parent,
+		// or some other way of checking to see if only the desired element is 100% in view
+		function elementInViewport(el) {
+
+			var top = el.offsetTop;
+			var left = el.offsetLeft;
+			var width = el.offsetWidth;
+			var height = el.offsetHeight;
+
+			while(el.offsetParent) {
+				el = el.offsetParent;
+				top += el.offsetTop;
+				left += el.offsetLeft;
+			}
+
+			return (
+				top >= window.pageYOffset &&
+				left >= window.pageXOffset &&
+				(top + height) <= (window.pageYOffset + window.innerHeight) &&
+				(left + width) <= (window.pageXOffset + window.innerWidth)
+			);
+
+		}
+
+</script>
+</body>
+</html>

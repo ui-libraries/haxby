@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Unnatural Networks</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--stylesheets-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="css/storymap.css">
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/L.Control.Layers.Tree.css" crossorigin=""/>
+
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Courgette|Inconsolata|Titillium+Web|Fira+Sans+Condensed" />
+	<!--Bootstrap-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--leaflet-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="js/leaflet-d3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js" integrity="sha512-yocoLferfPbcwpCMr8v/B0AB4SWpJlouBwgE0D3ZHaiP1nuu5djZclFEIj9znuqghaZ3tdCMRrreLoM8km+jIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!--side by side comparison-->
+	<script src="js/leaflet-side-by-side.js"></script>
+
+	<!-- mini globle map -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+	<script src="js/globeminimap.js"></script>
+	<script src="js/storymap.js"></script>
+
+	<script src="js/jqcloud.js"></script>
+	<script src="js/L.Control.Layers.Tree.js"></script>
+
+	<script src="js/attrchange.js"></script>
+  <script src="js/attrchange_ext.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
+	<div class="container-fluid" >
+		<a class="navbar-brand" href="#">
+			<img src="img/favicon.ico" class="align-top" height="20px" align="left"> &nbsp;
+		</a>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Unnatural Networks</a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=homepage]').offset().top-$(window).scrollTop()-40);">Home Page</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Charting the Unknown<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1a]').offset().top-$(window).scrollTop()-40);">Mythical Islands</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1b]').offset().top-$(window).scrollTop()-40);">Sea Monsters</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Modern Seafloor Mapping<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2a]').offset().top-$(window).scrollTop()-40);">Matthew Fontaine Maury, 1854</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2b]').offset().top-$(window).scrollTop()-40);">Richard Andree, 1900</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2c]').offset().top-$(window).scrollTop()-40);">Theodor Stocks, 1934</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2d]').offset().top-$(window).scrollTop()-40);">Heezen-Tharp, 1977</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2e]').offset().top-$(window).scrollTop()-40);">William F. Haxby, 1983</a>
+						</li>
+					</ul>
+				</li>
+<!--		ADD DROPDOWN WITH CHAPTERS
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Modern Seafloor Mapping</a>
+				</li>
+-->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Emails from the Pitman Fracture Zone, 1992<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3]').offset().top-$(window).scrollTop()-40);">The Course of the Ewing Cruise, EW9201</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3a]').offset().top-$(window).scrollTop()-40);">January 6, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3b]').offset().top-$(window).scrollTop()-40);">January 7, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3c]').offset().top-$(window).scrollTop()-40);">January 7, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3d]').offset().top-$(window).scrollTop()-40);">January 8, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3e]').offset().top-$(window).scrollTop()-40);">January 24, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3f]').offset().top-$(window).scrollTop()-40);">January 29, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3g]').offset().top-$(window).scrollTop()-40);">January 31, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3h]').offset().top-$(window).scrollTop()-40);">February 5, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3i]').offset().top-$(window).scrollTop()-40);">February 12, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3j]').offset().top-$(window).scrollTop()-40);">February 21, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3k]').offset().top-$(window).scrollTop()-40);">February 21, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3l]').offset().top-$(window).scrollTop()-40);">February 26, 1992</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">The Eirik Drift, 2002<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4]').offset().top-$(window).scrollTop()-40);">The Course of the Knorr Cruise, KN166-14</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4a]').offset().top-$(window).scrollTop()-40);">August 6, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4b]').offset().top-$(window).scrollTop()-40);">August 7, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4c]').offset().top-$(window).scrollTop()-40);">August 17, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4d]').offset().top-$(window).scrollTop()-40);">August 18, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4e]').offset().top-$(window).scrollTop()-40);">August 19, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4f]').offset().top-$(window).scrollTop()-40);">August 19, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4g]').offset().top-$(window).scrollTop()-40);">August 20, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4h]').offset().top-$(window).scrollTop()-40);">August 21, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4i]').offset().top-$(window).scrollTop()-40);">August 21, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4j]').offset().top-$(window).scrollTop()-40);">August 24, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4k]').offset().top-$(window).scrollTop()-40);">August 25, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4l]').offset().top-$(window).scrollTop()-40);">August 25, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4m]').offset().top-$(window).scrollTop()-40);">August 26, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4n]').offset().top-$(window).scrollTop()-40);">August 27, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4o]').offset().top-$(window).scrollTop()-40);">August 27, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4p]').offset().top-$(window).scrollTop()-40);">August 27, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4q]').offset().top-$(window).scrollTop()-40);">August 28, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4r]').offset().top-$(window).scrollTop()-40);">August 28, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4s]').offset().top-$(window).scrollTop()-40);">August 29, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4t]').offset().top-$(window).scrollTop()-40);">August 29, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4u]').offset().top-$(window).scrollTop()-40);">August 30, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4v]').offset().top-$(window).scrollTop()-40);">August 30, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4w]').offset().top-$(window).scrollTop()-40);">August 30, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4x]').offset().top-$(window).scrollTop()-40);">August 31, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4y]').offset().top-$(window).scrollTop()-40);">September 1, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4z]').offset().top-$(window).scrollTop()-40);">September 2, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4aa]').offset().top-$(window).scrollTop()-40);">September 3, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ab]').offset().top-$(window).scrollTop()-40);">September 4, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ac]').offset().top-$(window).scrollTop()-40);">September 5, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ad]').offset().top-$(window).scrollTop()-40);">September 6, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ae]').offset().top-$(window).scrollTop()-40);">September 6, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4af]').offset().top-$(window).scrollTop()-40);">September 6, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ag]').offset().top-$(window).scrollTop()-40);">September 7, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ah]').offset().top-$(window).scrollTop()-40);">September 8, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ai]').offset().top-$(window).scrollTop()-40);">September 9, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4aj]').offset().top-$(window).scrollTop()-40);">September 9, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4ak]').offset().top-$(window).scrollTop()-40);">September 9, 2002</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene4al]').offset().top-$(window).scrollTop()-40);">September 10, 2002</a>
+						</li>
+					</ul>
+				</li>
+<!--
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historical Seafloor Mapping<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1]').offset().top-$(window).scrollTop()-40);">Scene 1</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Scene 2</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3]').offset().top-$(window).scrollTop()-40);">Scene 3</a>
+						</li>
+-->
+<!--
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case1]').offset().top-$(window).scrollTop()-40);">Content 2</a>
+						</li>
+-->
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div id="scenes" class="col-sm-6 col-md-4 main">
+<!--
+			<section class="homepage" data-scene="homepage">
+        <h2>Haxby Project Title</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+      </section>
+-->
+
+			<section id="scene" class="homepage" data-scene="homepage">
+				<h2>Unnatural Networks</h2><h2 style="font-size:17px;color: rgba(0, 0, 0, 0.9);text-shadow: 0 0 1px rgba(255, 255, 255, 1)"><i>The Satellite, the Ocean, the Data, and the Scientist that Brought the Ocean Floor into View</i></h2>
+				<h3>In 1983, William Haxby published the first map of the ocean floor using satellite data. His map offered highly mediated access to the bottom of the ocean in a way that appeared direct.
+				All previous maps were based on soundings of ocean depth collected by sea vessels over centuries. Because these maps relied on data collected by ships and engaged changing technology, they were limited to discrete marinethose pathways and resulted in incomplete, irregular, and occasionally incoherent collages. Haxby used a new form of satellite radar that could accurately measure the height of the ocean’s surface. These data indirectly indicated the topography of the seafloor through gravitational differences: submarine mountains attract more water and ocean trenches attract less. Thus, seawater simultaneously obscured and revealed geographical features of the seafloor. Haxby was the first to mathematically transform the satellite’s numerical data about the ocean’s surface into a visual map of the ocean floor, rendered in believably watery colors.</h3>
+			</section>
+			<section id="scene" class="scene1a" data-scene="scene1a">
+				<h2>Mythical Islands</h2>
+				<h3>Today, the ocean is often idealized as a curative release from the ever farther-reaching tentacles of the modern technological juggernaut. In this popular conceptualization, the sea as separate from society offers a space of healing in which to repair oneself from the constant stresses of plugging in, needing to know, and fearing missing out. In other formulations–such as in “seasteading”–the ocean is the site of new ways to imagine the nation-state without the bonds of territory. Yet, this relationship with the ocean is itself dependent upon and produced by the very media (and their historical foundations) from which the ocean seems to promise escape. It also engenders its own set of intense anxieties over the sense that the ocean is something we are about to lose. The wild and vast expanse of the sea, understood in this way as opposite to society, was not always so vulnerable, and the ocean existed as a foreboding frontier to the advance of society, technology, and human knowledge. As an unknowable wilderness, it harbored grotesque sea monsters lurking just beyond the charted territory of <i>terra firma</i> or concealed both hellish and heavenly worlds beyond the fog.</h3>
+				<br>
+				<h3>Produced in 1630, Willem Blaeu's <i>Nova Totius Terrarum Orbis Geographica ac Hydrographica Tabula</i> demonstrates how cartographers once represented the unknown. These seas were unfamiliar and threatening places, inhabited by monstruous creatures and filled with unexplainable phenomena. For many centuries, European maps charted the locations of legendary islands in the North Atlantic, which were never found through subsequent exploration. Here, the islands of Brasil (here named Brazil), Mayda (Maidas), and Bacalao (Terra de Bacalaos) are clearly visible, but are nowhere to be seen in modern maps of the Atlantic.</h3>
+				<br>
+				<h3>The location of Brasil was informed by previous maps and myth, which claimed the island was intermittently visible from Ireland's western coast. To the south of it, Mayda was thought to be a crescent-shaped island west of Brittany. Both islands persisted on maps well into the 19th century. Some theories hold that Mayda and Bacalao were features of the North American coastline that early European explorers accidentally observed when lost. The Portuguese navigator, Joao Vaz Corte-Real was alleged to have explored the <i>Terra Nova do Bacalhau</i> shortly before Columbus landed at San Salvador in the present-day Bahamas. Some later hypothesized that Bacalao could have been present-day Newfoundland, as it appears in Blaeu's map.</h3>
+			</section>
+			<section id="scene" class="scene1b" data-scene="scene1b">
+				<h2>Sea Monsters</h2>
+				<h3>As spaces few navigators dared to explore, and from which many never returned, the seas existed on maps as a mirror of humanity’s darkest fears and exposed people's sense of frailty in a world they could not control. In place of certainty there existed chaotic schools of gigantic beasts rising from the abyss and a confession to knowing little more than the (recently invented) names of the oceans. In the bottom-left corner of the map, a large fictional land mass extending to the northwest from Antarctica is named <i>Terra Australis Incognita</i>, or "Unknown Land of the South." A whimsical seal beneath Magellan's ship pronounces the limits of cartography: "With the spherical earth reduced in this way to a level plane, we cannot display sites near the poles. At the northern and southern fiftieth parallels drawn here, we have concluded. Farewell and enjoy!"</h3>
+			</section>
+			<section id="scene" class="scene2a" data-scene="scene2a">
+				<h2>Matthew Fontaine Maury, 1854</h2>
+				<h3>In the 19th century, earnest endeavors began to map the ocean floor and peer into the hidden depths of the seas. The scrollable pages that follow document over a century of technological and scientific developments in charting the Atlantic seafloor. While this progress fuels the sense that the ocean has been rendered transparently available for observation and measurement and its mysteries are vanishing, concomitant discoveries have presented new questions. Just as Blaeu admitted the constraints of cartographic projections in 1630, each new technology sets its own limits to omniscience.</h3><br>
+				<h3>On the left, we see one of the earliest comprehensive attempts to measure ocean depth and the topography of the seafloor by Matthew Fontaine Maury in 1854. At this time, very little was known about the Mid-Atlantic Ridge, but Maury had surmised its existence a year earlier with depth soundings from the USS <i>Dolphin</i>. At this time, echo soundings and sonar had not yet been invented and fathoms were measured by sinking heavy sounding lines from ship decks.</h3><br>
+				<h3>You can pan, zoom, and drag the bar in the middle from left to right to compare these two maps in the historical progression of Atlantic seafloor mapping. You can also use the layer control at upper right to compare other maps.</h3>
+			</section>
+			<section id="scene" class="scene2b" data-scene="scene2b">
+				<h2>Richard Andree, 1900</h2>
+				<h3>By 1900, Richard Andree's map of the Atlantic indicated the presence of portions of a submerged mountain range spanning the middle of the ocean from north to south. The Atlantic seafloor was coming into more certain focus.</h3>
+			</section>
+			<section id="scene" class="scene2c" data-scene="scene2c">
+				<h2>Theodor Stocks, 1934</h2>
+				<h3>This map from 1934 by Theodor Stocks was based on some of the earliest sonar measurements of the Atlantic conducted by the German expeditions of the <i>Meteor</i>. Traversing the Atlantic multiple times between Africa and South America, the <i>Meteor</i> Expedition confirmed that the Mid-Atlantic Ridge extended continuously from the North to South Atlantic.</h3>
+			</section>
+			<section id="scene" class="scene2d" data-scene="scene2d">
+				<h2>Heezen-Tharp, 1977</h2>
+				<h3>The following map was printed by National Geographic in 1977 and is based on the oceanography of Marie Tharp and Bruce Heezen. In the 1950s, Tharp and Heezen demonstrated that the Mid-Atlantic Ridge was a vast rift valley and suggested that it was created by constant earthquakes. Their data led to the wide acceptance of plate tectonics, seafloor spreading, and the theory of continental drift, which had been earlier surmised with observations of the interlocking shapes of South America and Africa.</h3>
+			</section>
+			<section id="scene" class="scene2e" data-scene="scene2e">
+				<h2>William F. Haxby, 1983</h2>
+				<h3>In 1983, William Haxby used data gathered by SEASAT, a satellite that measured the shape of the sea surface, to create the first satellite maps of the ocean floor. This cutting-edge technology represented a move away from the sonar measurements defining the mapping of the seafloor in the earlier 20th century. SEASAT’s tracks were, at their closest, 50 miles apart, which enabled much higher resolution than Heezen and Tharp’s sonar data. In Haxby’s words (1986), “these SEASAT images reveal previously unmapped features such as seamounts, ridges and fracture zones; they improve the resolution of inadequately mapped features, and resolve unusual patterns in the gravity field that may be evidence for previously unknown dynamic processes occuring in the upper mantle beneath the oceans.”</h3>
+			</section>
+<!--
+			<section id="scene" class="scene2" data-scene="scene2">
+        <h2>Mapping the Seafloor Through History</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3><br>
+				<h3>Click the radio control in the top right corner to compare important maps in the historical progression of Atlantic seafloor mapping.</h3>
+      </section>
+-->
+			<section id="scene" class="scene3" data-scene="scene3">
+				<h2>The Pitman Fracture Zone, 1992</h2>
+				<h3>The Pitman Fracture Zone was named by William Haxby, Steven Cande, and Carol Raymond for Dr. Walter C. Pitman II, a geophysicist who studied seafloor spreading and continental drift. The 1992 Ewing Cruise documented here was funded by NSF grants to the Lamont-Doherty Earth Observatory, the Scripps Institution of Oceanography, and Caltech. Through their use of multibeam bathymetry and magnetometer data gathered during this voyage, Drs. Haxby, Cande, Raymond, and Stock were able to construct a plate motion history for the South Pacific over the last 65 million years. Through these reconstructions, they were able to determine that the movement between the Antarctic and Bellingshausen plates had been overestimated and ceased earlier than previously thought. While aboard the Ewing, William Haxby corresponded with family via early email through which he described his experiences at sea while gathering data. These correspondences are documented in the following story map chapter. Continue scrolling to learn more!</h3>
+			</section>
+			<section id="scene" class="scene3a" data-scene="scene3a">
+				<h2>January 6, 1992</h2>
+				<h3>Dear Bill,<br><br>It’s about noon on Monday here, so about 6 am Tuesday there? I suppose activist level is high so as to be set for departure tomorrow. Hope all is well. Bon voyage!<br><br>If you received our first letter (sent Thursday), please acknowledge so I will know it works. Sorry about the bumps and grinds in the text. I don’t know how to handle or edit Unix--back up to previous line, abort, word wrap, etc. And it was sent before we could read you first installment because had forwarded it by US Mail. This note is going out from a Mac II in Peria’s office.<br><br>Your journal “reports from the deep South” will be a wonderful record of your adventure--interesting and enjoyable. Keep it up, and send as often as you can. We are mailing copies to Bob, Mary, Jean, and Jim. By the way Jim does not know really whether you wrote to him or not. His address is haxby@alw.nih.gov; does that check with your records?<br><br>We had a good talk with Janie Saturday. She was jolly and was happy that we were finally to see Hamlet, something we promised her ages ago.<br><br>Best wishes for calm seas (fat chance!), for freedom (or nearly so) from mal de mer, for good data, for good food, for good companionship, for good whale watching--all in all, for a successful trip! Bon voyage!<br><br>Love,    Mom and Dad</h3>
+			</section>
+			<section id="scene" class="scene3b" data-scene="scene3b">
+				<h2>January 7, 1992</h2>
+				<h3>I’m here. Arrived at the ship yesterday afternoon, around 1 pm, after about 36 hours of travelling. It’s summer here. Walking back to the ship last night about 7:00 after a couple beers at a local pub (one of many), it felt strange that the day was so warm and bright at that time of night. Of course, the strangeness might have something to do with the fact that I had only ~8 hrs of sleep in the past 60 hours, plus jet lag, plus all the rest of it. I went to sleep around 7:30 last night, after forcing myself to stay up as long as possible. Woke up around 4:30, and caught the sunrise.<br><br>The ship is in Lyttleton harbour, a small port town separated from Christchurch by a rugged ridge, and connected to it by a tunnel. It’s lovely. The harbour is an ancient volcanic crater, and the surrounding hills are pretty spectacular. Hope to have some time to trek around up there in the next week.<br><br>We sail next Wednesday (which we call Tuesday back home). My cabin is large and comfortable, with a private bathroom. The ship seems quite spacious, although I expect it to shrink in the next two months. Lots of people around. I’m still sorting them out. Some will sail with us, some not. Of the scientific party, only Steve Cande, the senior chief scientist and my travelling companion of the past 2 days, and Suzanne Ohara, our computer support person, have arrived. Others will trickle in over the next week. The technicians and crew are a friendly lot. I know a couple of them from Lamont. Looks like we’ll be eating well. The cook is a graduate of the Culinary Institute.</h3>
+			</section>
+			<section id="scene" class="scene3c" data-scene="scene3c">
+				<h2>January 7, 1992</h2>
+				<h3>Dear Dad and Mom,<br><br>Well, it’s really happening. I never really believed it would. But I’m on the ship, waiting for breakfast to be served, on the other side of the world. I’m going to try to write journal entries into the computer regularly, and broadcast them to all the folks back home. The first follows this message. Being so far away, for so long, somehow motivates me to keep in touch more than usual. Maybe This trip will turn me into a reliable correspondent. Halleluja! We’ll see.<br><br>The smells of breakfast are wafting down from the galley, and I’m famished.<br><br>Love,   Bill</h3>
+			</section>
+			<section id="scene" class="scene3d" data-scene="scene3d">
+				<h2>January 8, 1992</h2>
+				<h3>Dear Bill,<br><br>Your E-mail came Wed telling of your arrival in New Zealand. Many thanks. We’ve been thinking about you all the way. We figure you are about 18 hours ahead so it is tomorrow most of today. All very confusing.<br><br>Hope you can take some time to enjoy summer before your ship leaves. Winter has turned nasty here with dark skies and freezing rain. Some snow up north.<br><br>Will talk to Janie on Saturday and share messages. All is well - take care - <br><br>You may receive some mail from haxby but please continue to send to peria.</h3>
+			</section>
+			<section id="scene" class="scene3e" data-scene="scene3e">
+				<h2>January 24, 1992</h2>
+				<h3>Dear Mom and Dad,<br><br>I’m sorry I haven’t written, I’ll try to write at least once a week from now on. I haven’t been able to sit down and organize my thoughts. Not because I’m all that busy, I’m just flaky. I spend most of my time in the science lab, where the data is always being recorded, and people are always milling about. Watching the picture of the sea floor unfold is very compelling. It doesn’t happen fast enough to overwhelm you, just fast enough that you have time to think about what it all means and try to predict what’s coming next. I lose track of time out here. The days are carbon copies of one another. I have to think hard to figure out what day of the week it is, and how long we’ve been out. It’s been 8 ½ days so far, I just figured out. We’re at 70 S latitude and 154.9 west longitude (that’s 205.1 on the map I gave you) and still heading south. I saw my first iceberg 2 days ago (or was it 3?), and they’ve been menacing the ship ever since (not really – it’s light all the time, and the ship has radar which can spot them miles away). I was just on deck as we threaded our way through a half dozen of the monsters. They are awesome, rising 100-150 ft above the waves, sometimes a half mile or more wide. While watching them march by, a whale swam with us for a while (my first this trip). It swam right off the bow for a few minutes. Leaning over the bow, we could see it swimming just beneath the waves, breaking the surface once or twice. I don’t know what kind it was. Maybe an orca or pilot whale. The other memorable critter of the trip is the albatross. We were surrounded by them (maybe 5 or 6 at a time) up until a couple days ago. They are splendid to watch. They never flap their wings and never rest on the water (at least, not that I saw). They just soar around and around, scimming the waves, often seeming to dip their wing tip into the water on a banked turn.<br><br>Except for the occasional venture outside, sometimes only once or twice per day, I am occupied in the lab. Sometimes I sleep, but that’s been a minor problem. I can’t seem to hit on a daily schedule that feels natural. The last two days I’ve slept 4 hours in the morning and 4 in the evening. No wonder it doesn’t feel natural -- 12 hour days! Next I’ll try a prime number of hours per day.<br><br>The weather has been very kind. Smooth sailing since we left Lyttleton. The weather maps showed gales all around us between 45 S and 60 S, but we managed to thread a path between them. A very low probability occurrence, I’m told. The days are cool, probably like New York at this time of year, and mostly overcast, with some snow.<br><br>I hope all is well.<br><br>Love, Bill</h3>
+			</section>
+			<section id="scene" class="scene3f" data-scene="scene3f">
+				<h2>January 29, 1992</h2>
+				<h3>Dear Bill,<br><br>Your wonderful letter from South 70°, West 154.9°, was greeted here with smiles and sparkles. Your words painted a fantastic picture of your majestic seascape. At S 70 you are just about off the edge of our copy of your world. It will be interesting to learn how far south you penetrate, but keep that radar in good condition. Hope you continue to sight exotic birds and beasts, but I don’t think I want to set the stage for monster icebergs.<br><br>We are not surprised at your disorientation, considering your double hemispheric change, loss of landmarks and dark nights, the novelty and interest of both surroundings and soundings, and the completely new work schedule. How do you handle the last? 4-hour watches twice a day (as in the navy)? or 8-hour watches? How do you handle meals? 24-hours buffet or three sets of “normal” meals? Does everyone get fat, or are you starting to take exercise time? The clock seems to be your only external regulator, as if you were on a space voyage. But routine is sure to develop.<br><br>I infer that 24-hour data recording is the regimen. Your data are displayed, then, as a strip of a 3-dimensional contour map of the bottom? How wide is the strip? What is the depth range in those parts? Is shadowing a problem? Do icebergs affect your data? Any surprises so far? Sorry about all these questions, but my curiosity is finally kicking in, and my own experience is no help.<br><br>You did not mention receiving any E-mail from us. This one is our third. We’d like a little reassurance that the sending system is working. Let us know. Jamie told us Sunday, Jan 26, that he had not yet heard from you via E-mail. Your letter to us was timed 0900 Jan 24 GMT. We figure that translates to about 0300 CST, same day. We don’t know when he checked for E-mail, nor whether or when you sent something off to him. If you’d like to write, the address he gave us is: haxby@alw.nih.gov.<br><br>I am nursing a sprained ankle dating from Jan 18 when we joined the Collins’ at Hyland Park for Xcountry skiing. I think I detect improvement. Mimi is healthy and busy, even played tennis this morning. Our serious X-country starts this coming weekend at Ely (YMCA Camp Northland). Mine will not be very serious. Two weeks later we’ll visit Gunflint Lodge with Johnsons and McLanahans for skiing and possibly dogsleding. Then out to Brainerd’s cabin in MT at the end of Feb.<br><br>Your letters are real treats for us. Family--friends--everyone is thinking about you. Our thoughts, good wishes, and love to you.<br><br>Dad<br><br>My turn now. Bill, your letter was wonderful. I’ve been going around with the image of the albatross dipping its wing in the wave on a banked turn.<br><br>At length did cross an Albatross;<br>Through the fog it came;<br>As if it had been a Christian soul,<br>We hailed it in God’s name.<br><br>Jim has filled you in on our activities. Tonight I’m going to watch George Bush’s State of the Union address. Jim will pass on it; he can’t stand the discomfort level.<br><br>Love you, Mom.</h3>
+			</section>
+			<section id="scene" class="scene3g" data-scene="scene3g">
+				<h2>January 31, 1992</h2>
+				<h3>Dear Mom and Dad,<br><br>I got your letter this morning. It’s good to hear from you. So far, I’ve only written to Janie, via friends at Lamont, and you, not including work stuff (the draw-back of e-mail; it used to be when you went to sea you were really out of reach). I like hearing about the goings on on the other side of the planet. My world here is so limited that I can easily begin to feel remote and detached from everything else, which isn’t healthy, but it’s me.<br><br>I like thinking of you venturing off on your serious X-country skiing trips (I hope your ankle heals quick, Dad, so it doesn’t hamper you). It’s a good mental picture. Enjoy.<br><br>Here’s what’s happening. We finished the south-most part of the survey. Made it to 72 degrees 25 minutes South, and could have kept going. We never reached the pack, just lots of icebergs. I’m disappointed we didn’t see the penguins, but we could accomplish more by turning. Now we’re “mowing the lawn” – surveying the fracture zone with long, parallel lines such that the bathymetric swaths just touch, so that we get 100% bathymetric coverage in an area about 700 km long and 60–70 km wide, centered on the fracture zone and the ridge axis. We do about 450 km per day, and the swaths are twice the water depth, so we need to run line between 5 and 7 km apart (depths vary from about 2500 to 3500 m). So you can work out the numbers. It will take a while.<br><br>We can see the data coming in in a number of ways. There’s a large pen plotter which plots the bathymetry in real time, and we can see the seismics, showing depth and near surface crustal structure directly beneath the ship, on paper readouts, also in real time. We note the magnetic field intensity every 5 minutes and plot that on graph paper. That gives the crustal age, if you know the pattern of magnetic field reversals, and the chief scientist, Steve Cande, is a master at identifying magnetic anomalies. Within a few hours of the end of the day (0000 GMT, or 1 pm local time) we get digital versions of all the previous day’s data, and can work it on the 2 computers we brought out for that purpose. So, a lot is happening in the lab. I’m enjoying myself.<br><br>I’m adjusting to the routine. I’m on a quasi-24 hour cycle. I get a good 8 hours every other night, and about 4–5 hours on the others. I’ve started working out daily, weather permitting, on a rowing machine. That helps. We’ve had a little buffeting about this week, but it’s back to gentle seas just now.<br><br>Thinking of you.<br><br>Love, Bill</h3>
+			</section>
+			<section id="scene" class="scene3h" data-scene="scene3h">
+				<h2>February 5, 1992</h2>
+				<h3>Dear Bill,<br><br>Our call from Bill Peria came mid-morning Monday, and I picked up your fine and welcome letter right after lunch. Thanks for your further detail about data gathering. I marvel at the navigational skill and aids that permit you to run such precision paths, which, I assume, are oriented at right angles to the ridge axis. Do you assure that bathymetric swaths “just touch” by matching features at the edges in flight or by trusting to navigation? All this must take practiced coordination. I’m all admiration. One day you must tell me more about the measuring instruments and the data processing.<br><br>We survived the first “serious” ski weekend! First, a little background. It’s been a weird winter for weather: precipitation nil or rain lately, high temps from the 20s to 40s, lows from upper teens to low 30s. Snow in town is still 4-10” but CRUSTY. So our expectations were pretty low, and I thought I’d have lots of company hiking. But--the first good omen was finding a great place to eat just north of Virginia on the drive up. Then, mirabile dictu, we found the snow at Northland deep with good texture. The land rises significantly from the lates, and most of the trail system is up on top. John Brainerd always leads us to the good trails up there that wind in and out of the beautiful border forest with occasional lengthy, undulating, gently downhill runs that give us chances now and then to catch our breath and recover our courage. But this year John couldn’t be there, and I couldn’t really ski--just walked on the road and lake. Mimi did ski, though, with the Johnsons and others through the woods to Slim Lake and then down an open trail that reaches Burntside near Widgiwagan, a couple of miles from the camp. I happened to meet them at the road crossing. I ramble, but we did have a good weekend with good people and will go back again next year.<br><br>My foot is much less swollen now--except for the big lump around my ankle. Hope I can ski at Gunflint where we spend Fri to Mon a.m., Feb 14-17, then back home Tues after a visit at Chubb Lake (near Carlton) with Pudge and Sarah Duncan. (I often visited there in high school and college days.) We hope the snow conditions on the border hold up until then.<br><br>The Olympic Games start this weekend. Any chance that you will be able to pick up a TV broadcast of the games by satellite--or, if so, that you’ll have any time to watch? Maybe you’d get it without commercials--make the whole trip worthwhile.<br><br>Have you had a chance to open “Moby Dick”?<br><br>Good sailing on gentle seas, Bill. We’re thinking of you.<br><br>Love,     Mom and Dad</h3>
+			</section>
+			<section id="scene" class="scene3i" data-scene="scene3i">
+				<h2>February 12, 1992</h2>
+				<h3>Dear Bill<br><br>It occurs to me that we will be out of touch for several days on this Gunflint excursion of ours, and would be well to drop a relaxed letter to you beforehand rather than a frantic one later. (I must assume that this outgoing E-mail path is open and functioning even if the other swears at us with “Host unknown” messages.) We hear that our accommodations are to be one 8-passenger A-frame--does it sound like a dormitory to you? In addition to the Johnsons and McClanahans the Wests will also attend bringing the total right up to the “full” mark. But we shall arrive first and lay claim to the best (or next to best) spot--whatever that means--closest to the bathroom? or farthest from the fireplace? or most comfortable mattress? or whatever, we shall see.<br><br>My ankle is much better. It tolerates walking very well, but is still swollen and not without pain in some positions. So skiing is still iffy, but enjoying the weekend seems pretty certain.<br><br>It seems strange to have to drive hundreds of miles to get a taste of the advantages winter can offer. Otherwise our routines and our mad [?] social whirl continues.<br><br>By the calendar you are now about two-thirds of the way through your data-gathering. We hope all has gone well and that you complete your objectives successfully. It must be very satisfying to see the seafloor map unfolding.<br><br>Thinking of you.<br><br>Love Dad.<br><br>Just a note from me. Talked to Janie Saturday, and she sounded perky even though she had a little cold. We saw Hamlet on her recommendation and had a good talk about that. She enjoys your letters and so do we. love,    Mom</h3>
+			</section>
+			<section id="scene" class="scene3j" data-scene="scene3j">
+				<h2>February 21, 1992</h2>
+				<h3>Dear Dad and Mom,<br><br>A little over eight days to go before solid ground becomes more than a theoretical concept. I have very mixed feelings about the end of this extraordinary voyage. I’m very lucky. How many people get such an opportunity? I sense a lot of envy when I talked about the cruise beforehand, and it made me feel bad. But the envy was justified. But this wouldn’t be the same without the science, so it’s just a small group of us – 4 or 5 – who appreciate the experience the way I do. The close interaction with scientists I’ve known for years but who were always on different tracks, intersecting only infrequently, has contributed to the experience. I’ve always been sort of a loner, working independently on my own stuff. I think most scientists I know work the same way, until circumstances force us to cooperate. On this cruise, the mix is just right. Everybody has a different enough focus so that nobody feels crowded or overshadowed, but the blend is all harmonious, and the whole is greater than the sum of the parts. Good magic.<br><br>I got an email message from Jamie today. I tried to send him something earlier, but figured I didn’t get through since he didn’t answer. I was right. I had the wrong address. So I’ve sent the previous letter to the new address. Hope it works this time. It was good to hear from him.<br><br>Despite the fullness of the experience, I’m about ready to head home. I’m planning some hiking in the Alps of the South Island in the few days between ship and plane. It will be good to be able to move around freely, and to find some solitude. It will also be good to get home and especially to see Janie. I miss her a lot. I’m worried about the readjustment to normal, fragmented life. I look forward to... I worry about... I’m going to miss... . As I said, mixed feelings.<br><br>Your email has been coming through. I think I have 1–5 complete. I find I get the urge to write about once a week. Then I write 3 or 4 letters all at once. It’s a little hard because I hate to repeat myself. The letters make a sort of journal. I’m saving them on the computer, and expect to look at them from time to time, maybe recapture some of the feelings. I know that three weeks from now, when I’ll be back on my home turf and caught up in familiar concerns and pursuits, this will all be a distant memory, like something I dreamed.<br><br>The Sea is calm now. It has been for the past two days. As we sail north on our drunken course, the weather becomes more normal, almost like real weather. We’ve had overcast about 99% of the voyage. I saw the stars once (sharing the sky with the aurora), the sun on just a handful of precious occasions, over the five weeks we’ve been in the far south. Now, I can actually see chunks of blue poking through the clouds. I don’t expect the calm to last. Overall the weather has been good. The biggest problem has been the fog. We’ve probably had a week of fog, cumulatively. We have to slow to 5 knots in the fog. The bridge gets nervous if they can’t see the icebergs until they take shape a couple hundred meters off the bow. Wimps. Yesterday we did 12 knots for about 8 hours, making up some of the lost time, and it felt great. Now, we’ve put the seismics back in the water so that top speed is 10 knots.<br><br>The picture of the sea floor that gradually took shape over the weeks, like an iceberg emerging from the fog bank, is extraordinary. The pictures (plural), really, since the data sets we collect tell different stories, which blend together to tell a larger story. Bill Ryan, a colleague whom we invited along for the ride, showed me something he wrote that develops the metaphor of a courtship – first, infatuation shaped by the superficial appearance and personality of the object of our attention, then a gradually deepening attachment as idiosyncracies are perceived and the true character takes shape. What can I say. We’ve been at sea for 5 weeks.<br><br>This is getting long. I started it last night, and now, after a good 7 hours of sleep (maybe I’m finally adjusting) it’s almost time to go on watch. And I still have to type this into the computer. I write everything out longhand in my cabin; it just doesn’t feel natural to compose at the keyboard.<br><br>Hope all is well with you. We’ll talk in two weeks.<br><br>Love,<br><br>Bill</h3>
+			</section>
+			<section id="scene" class="scene3k" data-scene="scene3k">
+				<h2>February 21, 1992</h2>
+				<h3>Dear Bill,<br><br>We got that very welcome call from Bill Peria this morning as we were finishing breakfast--and now I have your wonderful letter before me at the office. I, too, still feel more comfortable writing it in longhand before I start mangling it at the computer. I think I’m getting better, but I still miss typos until after I’ve entered the line and it’s cast in stone.<br><br>Your letter implies you will reach Christchurch again on Feb 29 or Mar 1. I’ll try to write again about Feb 26 or 27, just before we depart for the Brainerd cabin in Montana (near Roscoe). Right now it looks as if our activities will be hiking, but snow might well cover the X-country trails again by that time. We’ll be prepared for either/both. Current plans call for us to be homebound on Thurs, Mar 5, arriving on Friday. We should be alert for a call by the evening of the 7th (Saturday)--just about the 2-week point you mentioned.<br><br>You seem to be bubbling [?] over about the voyage and the results. We’re eager to hear all about everything, though how we can be satisfied without a face to face get together I don’t know.<br><br>Our long weekend excursion to Gunflint was a smashing success. (The smashing refers to the nose I fell on at the unexpectedly early finish of an ill-advised, after-dark ski adventure on a lighted trail. My night vision is an oxymoron.) But success it was! Great snow! Great trails! Great fellowship! May ankle held up nicely. For the most part we chose relatively flat trails, but we skied around 8 miles on Saturday, and about 4-5 on Sunday. The trails are scenic and well laid out. We skied through the first and on the lake; we had visions of Gunflint Lake and the surrounding “mountains.” We ate too much and slept like logs. We noted one miracle--the eight of us coexisted in an A-frame with one bathroom and remained friends. We’re all ready to repeat next year. Bill, you’d love it up there!<br><br>Mimi and I took a dog sled ride and had a ball. A team of 10 dogs pulled us up onto the high ground atop Gunflint Lodge, along a new loop trail just for the sled--then back down, pellmell, dogs racing, tails wagging, sled bouncing and twisting, musher using as little brake as possible. We’ll always remember that sight of those 5 pairs of dogs racing ahead of us through the lovely forest trail.<br><br>We’ve grown engrossed in the Winter Games but are ready for them to end.<br><br>Thanks again for your marvelous letter. Here’s to the happy end of your voyage and a safe return home.<br><br>Love,  M and D</h3>
+			</section>
+			<section id="scene" class="scene3l" data-scene="scene3l">
+				<h2>February 26, 1992</h2>
+				<h3>Dear Bill,<br><br>You should be almost in hailing distance of New Zealand again now and will be taking a big load of memories and new experience off the ship in addition to your luggage and equipment. So great to have had this unique opportunity!<br><br>We hope that preparing your equipment and data for transport back to Lamont will go smoothly and allow you good time to explore the mountains and rivers and fjords of South Island. (Is this the rainy or dry season there?)<br><br>We’ve just had our first snowfall (maybe 3-4”) since early December. It has covered the bare sports that were beginning to appear--but they’ll peek through again soon. Mimi strapped on her boards for a ski along the marsh trail and returned flushed and happy. At least the snow will help us postpone questions about gardening this year for a while.<br><br>The Olympic Winter Games are history now. Both the sport and the spirit of the games are always exciting for us--but the hype and commercialism and intrusion of the broadcasts gradually wears us down, so we’re ready to put them behind us for a while. (“Tell us how you felt when you missed that triple Salchow”; “Do you think the people of Japan will forgive you for receiving only the silver medal? etc.) Maybe by February 1994 we’ll be eager again.<br><br>We leave Saturday (Feb 29) for Montana and skiing/hiking in those beautiful valleys leading into the Beartooth. It will be a good chance to see John and Andrea in the spot they love best. We should be home by late Friday, March 6, barring blizzard, car trouble, etc.<br><br>Perhaps you’ll be flying back about the same time. It will be good to talk with you again, not that E-mail hasn’t been great.<br><br>Have a safe trip home. Love, Mom and Dad</h3>
+			</section>
+			<section id="scene" class="scene4" data-scene="scene4">
+				<h2>The Eirik Drift, 2002</h2>
+				<h3>The Eirik Drift, resting just below the souther tip of Greenland, is a large deposit of sediment providing records of thermohaline circulation dating back to the Miocene, more than 5 million years before present. The 41-day R/V Knorr cruise documented here was led by Greg Mountain, Jim Wright, and Pat Manley and included students from Middlebury College and Lamont-Doherty Earth Observatory and sought to reveal the impact of historical deep-sea circulation on the seafloor. The expedition started and finished in Reykjavik, Iceland and collected bathymetric, sonar, echosounder, and seismic reflection data as well as gravity and jumbo piston cores. William Haxby joined the voyage to process data and produce images of current-induced bedforms. The following chapter constitutes Haxby's journal notes while aboard the Knorr. Scroll to find out more!</h3>
+			</section>
+			<section id="scene" class="scene4a" data-scene="scene4a">
+				<h2>August 6, 2002</h2>
+				<h3>Whales Sighted<br><br>Two sightings today. The first was just some spouting in the distance. Then, during lunch, a pod (?) of small whales (Minke or Pilot, according to some folks who may or may not know what they’re talking about) sauntered by, checking us out. Impressive. Whales – check.<br><br>Weather continues to be fine (going on 24 hours) and the sea has calmed considerably, so spirits have lifted noticeably. We had a beautiful sunset yesterday (not a frequent occurrence in these parts, I’m told). Sunset – check.<br><br>I’m on a fairly civilized schedule, unlike most people on board who have two 4 hr shifts (watches) per day. I can set my own schedule, and have decided to make sure that I am around for every meal. Here’s what it looks like:<br><br>~6:30 up<br>7 process data collected last night<br>7:30 breakfast<br>8–11:30 work<br>11:30 lunch<br>12–5 work<br>5 dinner<br>6 work, send email<br>(email is sent-from/delivered-to ship 3X per day:<br>9 am, 1 pm and 7 pm)<br>7 check email, then work<br>10 popcorn and book<br>11 bed<br><br>When I say work, it means a variety of things. A lot of computer programming, and making plots to support the science. After dinner, I work more on my own projects which may or may not help the science effort. I also take breaks, and spend some time on email. I’m starting this journal so that I don’t have to retype the same stuff for everyone I’m keeping in touch with. I suspect, from past experience, that as time passes, my enthusiasm for work will diminish. I may also start sleeping through breakfast and stop making my bed every day, but I hope not.</h3>
+			</section>
+			<section id="scene" class="scene4b" data-scene="scene4b">
+				<h2>August 7, 2002</h2>
+				<h3>Science<br><br>We’re enjoying very quiet weather. I don’t remember ever sailing with wind and waves this quiet. Great for data collection. Some clouds have rolled in, but nothing threatening, yet.<br><br>We’re cruising along at a jogging pace – about 5 knots – which is optimum for collecting multichannel seismic (MCS) data. With MCS, an explosion from the air guns (2 guns) is listened to by 48 electronic ears (hydropohones or “channels”) trailing behind the ship on a cable 600 meters long. They listen for echoes (reflections) from the sea floor, and from geologic layers beneath the sea floor. We can “see” about 1 kilometer beneath the seafloor. If we go too fast, the ears start bouncing around and generally misbehaving; if we go too slow, we don’t go anywhere. The MCS data are being processed on board ship, instead of just archiving them for processing back at Lamont. After some aggravating software problems, we’re beginning to see some results, and some of those results are quite interesting (Science – check). My role in the MCS effort is to walk by from time-to-time and say “Wow!”, or “Ooh”. This role, like all my responsibilities, I take very seriously.<br><br>My main responsibility is to manage the multibeam data. These map the seafloor along a swath, with a width about 3 times the water depth, centered on the ship’s track. Maybe I’ll write more about multibeam later in the cruise.<br><br>Filling in some details on shiboard life:<br><br>I have my own room (cabin), which is on the floor (deck) just below water level. Hence – no porthole. I share a bathroom with one other guy – Peter Buhl, with whom I flew to Iceland. Meals are at 7:30 a.m., 11:30 a.m. and 5:00 p.m. The food is excellent, and served in great heaps, unless you request a modest helping. Two nights ago was Mexican night – enchiladas, refried beans mexican rice, etc., and beer(!). I believe I am allowed two beers this cruise. Smoking is not permitted inside, only outside, “on deck,” which means that I am smoking less, and going on deck a lot, both of which are good things. I work in the SeaBeam (brand-name for WHOIs multibeam) lab, which is one deck above the main lab, and two above my cabin. Typically, I am either alone here, or share it with one of the students; students are doing the “ping editing” – examining the multibeam data for bad data. Most of my time in the lab is spent on processing the multibeam and writing software.</h3>
+			</section>
+			<section id="scene" class="scene4c" data-scene="scene4c">
+				<h2>August 17, 2002</h2>
+				<h3>Taking cores at the “GAR2A”, the location of a future ODP (the Ocean Drilling Program) drill site. The GGC (“giant gravity core”) is on deck, and the JPC (“jumbo piston core”) is on its way down. We will be under way again in about 2 hours, heading for Greenland’s seas. When we arrive, our target will be the great “Eirik Drift” which is a heap of mud – one of the biggest heaps in the world – much bigger than the puny “Gardar Drift,” which we have now left behind. Ours will be the definitive work on Eirik for some years to come. Everyone working on mud heaps will have to read and cite our work. Immortality – check.<br><br>When we are coring, the ship’s location is maintained by its “dynamic positioning system.” A computer monitors GPS and fires the thrusters when appropriate to keep the ship within 1–2 meters of the same position for the 2-or-so hours it takes for the coring operation. Amazing.<br><br>Tomorrow night, as we steam toward Greenland, we of the science party will be preparing and serving dinner for the whole ship. I wasn’t involved in the decision and don’t know any of the details. More later.<br><br>I just went outside (07:00) and witnessed the sunrise. It has been raining (coring crew wet), but there was a little sliver of clear sky on the horizon into which the sun popped.</h3>
+			</section>
+			<section id="scene" class="scene4d" data-scene="scene4d">
+				<h2>August 18, 2002</h2>
+				<h3>Last night, we — Greg Mountain, (chief scientest), Peter Buhl (MCS specialist), Jim Wright and Pat Manley (co-investigaros), and Ellen Somebody (coring specialist), and me (?!) — sat out on deck for about two hours enjoying a warm quiet, sunny evening. The sunset was the best yet. Whales passed by in the distance. We could see them spout, and occasionally we could make out a shape. A golden evening. Now, the wind is up to about 30 knots, it’s raining periodically, and the ship is bouncing around fairly impressively. We are sailing through a storm. The captain says it will probably last another 24 hours. Although the weather has been by-and-large very good, our golden evening was, I fear, a one-time event. A gift.<br><br>We’re off the hook for dinner tonight. Rescheduled for the transit back to Iceland. Just as well. If it’s a disaster, then the crew will overlook it – they will be in high spirits as we head into port.<br><br>We’re making up a watch list for an “ice watch” at the captains request. This is evidently a heavy ice year, and as we survey close to Greenland (maybe as close as 30 mi.) we will have to pay attention. The most dangerous ice is the big chunks that the icebergs shed as they melt – “growlers” that barely break the surface and so are virtually undetectable by radar. We will try to keep as far as possible from the icy parts at night.</h3>
+			</section>
+			<section id="scene" class="scene4e" data-scene="scene4e">
+				<h2>August 19, 2002</h2>
+				<h3>Woke up at 3 this morning, and couldn’t get back to sleep. When I came up to the lab, I was told that there were northern lights. Indeed there were! Still are — I just came back in. They cover the sky from east to west, right above the ship. There aren’t different colors, just white, so at first they just look like wispy clouds. But then you notice that they slowly shimmer — if you look in one part of the sky for a minute-or-so, they will become diffuse and fade, then sharpen into focus in another curtainy pattern. Impressive. Northern Lights – check.<br><br>I am mildly disturbed by my inability to sleep for more than 3–6 hours. Today, after my “ice watch” (1100–1200), I’ll try an afternoon nap. Morning are no problem. But with only 3 hrs the night before, I fade fast in the afternoon and evening. Maybe it was the aurora that woke me up today.<br><br>We have begun the last and largest survey of the cruise. Science watches, discontinued for the transit, have recommenced, to the dismay of the students (well, tough), and will continue until the last (2 day) transit back to Iceland. I can’t believe we haven’t even reached the half-way point (“hump day” is Thurs., I think).<br><br>The front passed us just about the time I woke up (maybe that’s what woke me), and the sky is now cloudless, with stars and aurora. It’s noticeably cooler. Air temperature is about 45 F, slightly cooler than the water. As we survey the mud, we will cross and re-cross a current front, and will see water temperatures in the mid 30s on the other side.</h3>
+			</section>
+			<section id="scene" class="scene4f" data-scene="scene4f">
+				<h2>August 19, 2002</h2>
+				<h3>I lied about the front passing. The pressure started to drop again, the clouds rolled back in, and the wind is back up to around 25 knots. We are sailing “in the trough,” which means the waves and swell are “on our beam,” which means we’re moving cross-wise to the waves, which means the ship “rolls” (rocks from side-to-side) a lot. Getting from “A” to “B” takes some planning, like remembering to keep a hand free, and always out for railings and other useful stabilization aids. Walking around with hands in pockets is not an option. Taking a shower, normally a two-handed endeavor, has interesting features.</h3>
+			</section>
+			<section id="scene" class="scene4g" data-scene="scene4g">
+				<h2>August 20, 2002</h2>
+				<h3>Beautiful sunrise today. But red. The weather, which quieted down over night, is predicted to deterioriate (and not just be the red sunrise).<br><br>The scientists are dismayed by the limitations imposed by the ice conditions on the planned survey. Yes, there is ice. I saw a couple of icebergs through binoculars yesterday (icebergs – check). The trouble is – the captain insists on slowing down to a crawl during the nighttime, if we are in the icy regions, and especially if there is fog. This is all right for preserving the ship and people’s lives and so on, but the science suffers as a result. Tough call. The science suffers because our productivity is directly proportional to the distance logged, and also because the multibeam data are awful when we are wallowing at 2–4 knots. The science strategy will be to survey during the day and do mostly coring at night. The coring crew is delighted.</h3>
+			</section>
+			<section id="scene" class="scene4h" data-scene="scene4h">
+				<h2>August 21, 2002</h2>
+				<h3>We are coring, partly because we can’t do anything else just now. Fog rolled in last night, just after we passed an ice berglet, and the captain decided to “heave to” (stop) until we could see more than 2 boat lengths (about 580 ft) ahead. That was around midnight. There is hardly a breath of wind, and the ship’s motion is a gentle rocking in the minimal swell. 20 minutes ago, there was a whale event. A dozen or more pilot whales wandered to within about 75 ft. of the ship, and hung around for about 15 minutes. We (everyone) could clearly hear them breathing (*Pfft*), and as they slowly swam away I imagined what they were saying “Research Vessel – check.”<br><br>Yesterday, on ice watch, I saw some puffins (-check).</h3>
+			</section>
+			<section id="scene" class="scene4i" data-scene="scene4i">
+				<h2>August 21, 2002</h2>
+				<h3>Still calm. Fog has lifted slightly. We’re “shooting” MCS, and hoping the fog will lift more so we don’t have to pull in the guns and streamer at sunset. It takes about 2 hours to set up the MCS equipment, and 2 hours to take it in. It can stay in for up to 7 days without maintenance.<br><br>Took a 2 hr nap this afternoon.</h3>
+			</section>
+			<section id="scene" class="scene4j" data-scene="scene4j">
+				<h2>August 24, 2002</h2>
+				<h3>Not bad, at the moment. It got lively last night around 9 or 10. Sustained 32 knot winds (not quite gale force). The course we set, for multibeaming, was not very popular. We were right “in the trough” and the rolls were occasionally impressive (up to 30 deg.). Weather is expected to worsen again through the day. From Navy weather forecasts, it appears that two lows are roaming around in our vicinity: one moving briskly from SW to NE, passing to our east, and one just hanging there to our west. The forecast puts the second one right on top of us at midnight tonight. We’ll see.</h3>
+			</section>
+			<section id="scene" class="scene4k" data-scene="scene4k">
+				<h2>August 25, 2002</h2>
+				<h3>Looks like the storm is finally beginning to move away. Rising barometer, winds slightly down and veering west. By noon, we expect smoothish sailing. Hoping to start shooting MCS tonight.<br><br>Beer was cancelled last night. I guess it was a decision motivated by safety considerations.</h3>
+			</section>
+			<section id="scene" class="scene4l" data-scene="scene4l">
+				<h2>August 25, 2002</h2>
+				<h3>Nice weather again. The swell is still fairly high, but that should diminish.<br><br>In bad weather, our only surveying option is multibeam. This means that providing the bridge with “way points” becomes a constant concern. They like to know where we’ll be this time next week, but the scientists change their minds hourly about what we’d like a closer look at. Guess whose job it is to select the way points. Me – “Dr. Waypoint.” Actually, the scientists tell me approximately where they want to go, then I choose the way points that most efficiently satisfy their wants, while making sure we don’t duplicate past survey lines. This is complicated by bad weather. Sometimes, when we give the bridge our way points, they veto them because of the weather, so it’s back to the drawing board. With the improved weather, we’ll be setting out on an MCS line. Two days with only 4 way points. I can get some work done.</h3>
+			</section>
+			<section id="scene" class="scene4m" data-scene="scene4m">
+				<h2>August 26, 2002</h2>
+				<h3>Pressure rose almost 30 mBar, from a low of 985 to 1014 around 10:00 today. Now it’s beginning to fall again. The next low should pass well to our south, however. This past one just seemed to stall right over us, and knocked us around for about 36 hours. The satellite images of clouds in our area look like classic pictures of hurricanes, although this was not even close to that level.<br><br>Woke up at 03:30 this morning, and couldn’t get back to sleep. Since I was rewarded with northern lights the last time that happened, I fully expected the same today. Not. So I napped this morning from about 08:30–11:15. (“Ahem! Don’t you have ice watch beginning at 11:00?” you may ask.) Woops. I was punished by missing some wildlife action – pilot whales and puffins. Ice watch is not too stressful these days. No ice, even on the radar, for about 5 days.<br><br>We’re shooting MCS in light breezes and gentle seas. I hardly even notice the ship motion.</h3>
+			</section>
+			<section id="scene" class="scene4n" data-scene="scene4n">
+				<h2>August 27, 2002</h2>
+				<h3>It didn’t feel so bad when I woke up an hour ago. The swell takes a little while to build up, and this storm is moving pretty briskly. Now the swell is building. Pressure dropped 25 mBar in 22 hours, still falling, but looks like it’s beginning to level off. We’re still shooting seismics, but there is some concern about the equipment. There is also some concern about safety, if we have to pull it in. Everyone is hoping the storm will pass quickly, which it should.</h3>
+			</section>
+			<section id="scene" class="scene4o" data-scene="scene4o">
+				<h2>August 27, 2002</h2>
+				<h3>I guess the storm moved quickly right up until it got to us. We were its target. No indication of any letup. We pulled the MCS equipment, and are now surveying a patch with multibeam, because we have to do something. Time to call Dr. Waypoint.</h3>
+			</section>
+			<section id="scene" class="scene4p" data-scene="scene4p">
+				<h2>August 27, 2002</h2>
+				<h3>It’s too rough to survey. Data quality zero. Hove to about 2 hours ago. Barometer finally rising, but the wind actually rose a bit over the past 2 hours. Sustained 35–40 knots.</h3>
+			</section>
+			<section id="scene" class="scene4q" data-scene="scene4q">
+				<h2>August 28, 2002</h2>
+				<h3>Whew! 18 hours of 30+ winds. Hove to for about 12 hours. hour-after-hour of bouncing around is enervating. Just didn’t feel like doing anything productive. There was a nice sunset just before I went to bed. The sun settled through clear sky on the horizon and underlit the cloud bank. Eddie (the “AB” – able-bodied seaman – on watch) said he saw a “green flash”. It makes me doubt all reports of the green flash. Just before the sunset, I was in the “smoking hangar” (a garage on the main deck – good place to watch the storm-tossed waves), and noticed hundred of kittywakes (the N. Hemisphere’s answer to the albatross, but much smaller; our most loyal companions) off the fantail. When the sun broke through into the sliver of blue sky, they all turned pink (normally white). This was what alerted me to the sunset-viewing opportunity.</h3>
+			</section>
+			<section id="scene" class="scene4r" data-scene="scene4r">
+				<h2>August 28, 2002</h2>
+				<h3>Ice in view. A big one, but 7+ miles away, now astern. Had an extra long ice watch today, because my relief was deploying the guns ’n streamer for resuming MCS. Saw a really exotic bird – a sparrow! Poor thing must have been blown out to sea in the storm. Wonder if he/she will ever see home again, wherever that is.</h3>
+			</section>
+			<section id="scene" class="scene4s" data-scene="scene4s">
+				<h2>August 29, 2002</h2>
+				<h3>Here we go again. Winds around 30 knots, and the pressure hasn’t even started to fall, yet. Greg is looking more and more discouraged.<br><br>Actually, I just learned that the next storm isn’t due for another 12 hours. This one might set the cruise record: 40–50 knot winds predicted.</h3>
+			</section>
+			<section id="scene" class="scene4t" data-scene="scene4t">
+				<h2>August 29, 2002</h2>
+				<h3>The weather service (US Navy, I think) has up-graded the gale warning to a storm warning. Bad news. Should start around 8 tonight.<br><br>When I showed up for ice watch, Greenland was just visible on the horizon. Some gray humps above the haze, just visible with the naked eye. Even from 70 miles away it looked pretty imposing. Check.</h3>
+			</section>
+			<section id="scene" class="scene4u" data-scene="scene4u">
+				<h2>August 30, 2002</h2>
+				<h3>The storm wasn’t as bad as expected, although it’s not over quite yet. The front passed, so the sky has cleared, but we’re expecting some brisk NW winds for the rest of the day. They will probably bring cooler temperatures.<br><br>Fire n’ Boat drill this morning. One more to go.<br><br>The Seabeam system crashed, and the techs are having trouble bringing it back up. It means less work for me, but I have plenty to keep me busy, even it is gone for the rest of the cruise.</h3>
+			</section>
+			<section id="scene" class="scene4v" data-scene="scene4v">
+				<h2>August 30, 2002</h2>
+				<h3>I was wrong. The storm has just slowed down as it approached us. Like all the other storms, it was fast-moving until it reached out position. Expecting 40–50 knots winds or higher. Well be hove to all night and into tomorrow. Already the waves are higher than the last storm, probably 30–35 ft.<br><br>The SeaBeam is fixed, and collected some awful looking data until we turned it off.</h3>
+			</section>
+			<section id="scene" class="scene4w" data-scene="scene4w">
+				<h2>August 30, 2002</h2>
+				<h3>Oh, man!<br><br>No sign of it getting better. View from the bridge is amazing. And from the smoking hangar. Borderline apocalyptic.</h3>
+			</section>
+			<section id="scene" class="scene4x" data-scene="scene4x">
+				<h2>August 31, 2002</h2>
+				<h3>Much better now, relatively speaking. The winds will gradually calm down today, and we will probably start surveying again this evening. The swell is still very impressive; any course change would be extremely unpopular.<br><br>One more week of surveying. We start heading back to Iceland next Saturday around noon.</h3>
+			</section>
+			<section id="scene" class="scene4y" data-scene="scene4y">
+				<h2>September 1, 2002</h2>
+				<h3>Wind is down to 15–20 knots. Riding comfortably on the broad swell. We’ll resume science this morning, after almost 48 hours after heaving to. Coring, then MCS.<br><br>By next week we’ll be on the way back to port.</h3>
+			</section>
+			<section id="scene" class="scene4z" data-scene="scene4z">
+				<h2>September 2, 2002</h2>
+				<h3>I had my best night’s sleep so far. Nearly 8 hrs. We’re riding comfortably in light breezes and just a hint of the swell left by the storm. The sea looks so peaceful and harmless. We’re shooting MCS, and probably will continue as long as the weather holds. No storms in the forecast, as far as I know. Maybe we’ll have a couple days of peace before the next one.<br><br>I missed a good light show last night, so I hear.</h3>
+			</section>
+			<section id="scene" class="scene4aa" data-scene="scene4aa">
+				<h2>September 3, 2002</h2>
+				<h3>Quiet night. Winds picking up slightly, out of the east. Must be a low somewhere to the south, but I haven’t heard any dire forecasts. Still running MCS.<br><br>We realized over the weekend that the AGU abstract deadline is looming – Thursday. So we’re trying to organize out thoughts, and distill the survey into a few sentences. I will be making plots of data, and creating a data archive that the scientists can put on their shelves back at the lab. Tedious. But that’s my job.</h3>
+			</section>
+			<section id="scene" class="scene4ab" data-scene="scene4ab">
+				<h2>September 4, 2002</h2>
+				<h3>Uneventful. There’s a moderate swell, and we’re rocking a bit, but the wind is still unremarkable. If this holds, it will be the 4th straight day of good weather. Still shooting MCS, and working on abstracts and organizing data.</h3>
+			</section>
+			<section id="scene" class="scene4ac" data-scene="scene4ac">
+				<h2>September 5, 2002</h2>
+				<h3>Pleasant sailing. Going in-and-out of fog. Doing detailed MCS surveys to locate a core site where we hope to reach some much older mud. Then off to a similar site, 6 hours away, to repeat the excercise. The plan is then to run one more MCS line before head for Iceland. Some worried about “Dolly,” a tropical storm or depression, that will be chaseing us on the transit to port. Could be rough going.<br><br>Saw some whales today on ice watch, and a skua (aquatic counterpart of a hawk). Only one more day of ice watch.</h3>
+			</section>
+			<section id="scene" class="scene4ad" data-scene="scene4ad">
+				<h2>September 6, 2002</h2>
+				<h3>Last full day of the survey. This time tomorrow we’ll be headed for port. Wind is picking up. It’s getting borderline for MCS, but I think they will keep going until it’s impossible. Coring is not an option, even if we had enough undamaged equipment. The core yesterday was another failure – third in a row; big disappointment.<br><br>Last fire and boat drill today. Almost time to start counting the hours.</h3>
+			</section>
+			<section id="scene" class="scene4ae" data-scene="scene4ae">
+				<h2>September 6, 2002</h2>
+				<h3>Getting lively. There’s a way-point flurry going on, but I’m not involved this time – planning a MCS survey of short segments. One of the two air guns has failed, so the “gunners” are pulling it in. This is a real test of the MCS gear. I don’t think anyone was planning to run it in 30 kt winds. Even now, with only one gun and in these seas, the data quality is amazing.</h3>
+			</section>
+			<section id="scene" class="scene4af" data-scene="scene4af">
+				<h2>September 6, 2002</h2>
+				<h3>We’re headed home. We broke off early because it would have been impossible, or at least stupid, to deploy the gear in these seas. Not a good note to end on. At least we probably won’t have to worry about Dolly, and we’ll make port a few hours earlier than expected. So that’s it.<br><br>I realized today that I’m almost incapable of doing any more creative work. The well is dry. I guess I need a break every so often to recharge, and right now I need a big one. Well, what do you know? I’m going to Minn. for two weeks starting next weekend. What good planning. I feel sorry for the students and teachers who will have to jump right into classes – just about everyone in the science party.</h3>
+			</section>
+			<section id="scene" class="scene4ag" data-scene="scene4ag">
+				<h2>September 7, 2002</h2>
+				<h3>A fitting sendoff. I wonder if this storm will follow us all the way to port. It’s been blowing 25–30+ kts for over 24 hours. At least it looks like we might see 50 degrees for the first time in about 3 weeks.</h3>
+			</section>
+			<section id="scene" class="scene4ah" data-scene="scene4ah">
+				<h2>September 8, 2002</h2>
+				<h3>Wind is picking up after over 24 hrs of 25–30. Haven’t we had enough?</h3>
+			</section>
+			<section id="scene" class="scene4ai" data-scene="scene4ai">
+				<h2>September 9, 2002</h2>
+				<h3>Finally! The wind started to drop around midnight. We’re riding very comfortably. The sun is shining for the first time in months (seemingly). I guess we outran old Dolly. It may catch up to us in Iceland, however. Temperature topped 50 around midnight! I missed it. Actually slept through breakfast for the first time. Feeling great – rested, sun is out! – with just a faint twinge of melancholy as this winds up.<br><br>ETA 1800. Five more hours.<br><br>Awful weekend. Awful, awful. Besides the weather, I spent most of Friday and all of Saturday (from 0600 to 2100) making plots on the printer. Now I’m making backups of all the data that I’m responsible for. I’ll probably have to do some more work tomorrow, like making maps, if I can face it.st for the first time. Feeling great – rested, sun is out! – with just a faint twinge of melancholy as this winds up.</h3>
+			</section>
+			<section id="scene" class="scene4aj" data-scene="scene4aj">
+				<h2>September 9, 2002</h2>
+				<h3>Land sighted!</h3>
+			</section>
+			<section id="scene" class="scene4ak" data-scene="scene4ak">
+				<h2>September 9, 2002</h2>
+				<h3>I just came in from a photo session in the bow. We’re almost in the harbor, but we’ll have to wait an extra 1-1/2 hours for the pilot who will drive us to the pier. It’s a beautiful day – lots of sunshine, warm (51).</h3>
+			</section>
+			<section id="scene" class="scene4al" data-scene="scene4al">
+				<h2>September 10, 2002</h2>
+				<h3>Final entry.<br><br>We docked around 8:30 last night. The sunset! Yesterday was a gift. Beautiful day, smooth ride, no hint of what we left behind, and the sunset of all time.<br><br>Took a walk after breakfast, along the sea wall and back, in the rain. It felt so-o good. Lots of ducks, geese, gulls, and unfamiliar shore birds. No kittywakes or shearwaters, which I will remember fondly. They stayed with us the whole time, except at the height of the storms. I wonder where they went at those times.<br><br>The world is lurching. Dock-rock. Not everyone feels it, but most do to some extent. It gets tiresome real fast. A parting gift.<br><br>Today, we wrap everything up. The first contingent, the Middlebury crowd, leave for the airport in about 4 hours. Then the rest will start drifting off, the largest contingent leaving tomorrow at 4:40 pm. That includes me. Some are staying to see the sights. The gunners – Doug ’n Jean – are planning to take a day trip to Greenland. I’m not tempted. Maybe next time.</h3>
+			</section>
+
+<!--
+			<section class="scene3" data-scene="scene3">
+				<h2>Scene 3</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+
+			<section class="scene4" data-scene="map_hex_case1">
+				<h2>Scene 4</h2>
+      </section>
+-->
+		</div>
+		<div id="map" class="col-sm-6 col-md-8 sidebar"></div>
+	</div>
+	<i class="animated zoomIn infinite glyphicon glyphicon-menu-down arrow-down arrow-down-custom2"></i>
+	<div class="progress-line"></div>
+	<ul class="navwidget text-center"></ul>
+
+</div>
+
+<script type="text/javascript">
+
+		const seasat = L.imageOverlay('img/Seasat.jpg', [[-50, 90], [70, -150]]);
+
+		const mIslands = L.geoJson.ajax('data/mythIslands.geojson', {
+			// make a layer from points
+  		pointToLayer: function(feature, ll) {
+        // return a marker
+        return L.marker(ll, {
+          icon: L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      },
+			onEachFeature: function(feature, layer) {
+				const island = layer.feature.properties.name;
+				layer.bindTooltip(island, {
+          sticky: true
+        });
+				layer.on('mouseover', function(e) {
+					e.target.setIcon(new L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				layer.on('mouseout', function(e) {
+					this.setIcon(L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+			}
+		});
+
+		/* LAYERS FOR THE COMPARATIVE MAPS */
+		const mauryLayer1 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer2 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer3 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer4 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer5 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+
+		const andreeLayer1 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer2 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer3 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer4 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer5 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+
+		const meteorLayer1 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer2 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer3 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer4 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer5 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+
+		const tharpLayer1 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer2 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer3 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer4 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer5 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+
+		const haxbyLayer1 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer2 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer3 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer4 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer5 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+
+		const gmrtLayer1 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer2 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer3 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer4 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer5 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+
+		const gmrtLayer6 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC', maxZoom: 16 });
+		const CyclOSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {maxZoom: 20, attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+
+		const mLayer1 = L.layerGroup([mauryLayer1, andreeLayer1]);
+		const mLayer2 = L.layerGroup([mauryLayer2, meteorLayer1]);
+		const mLayer3 = L.layerGroup([mauryLayer3, tharpLayer1]);
+		const mLayer4 = L.layerGroup([mauryLayer4, haxbyLayer1]);
+		const mLayer5 = L.layerGroup([mauryLayer5, gmrtLayer1]);
+
+		const aLayer1 = L.layerGroup([andreeLayer2, meteorLayer2])
+		const aLayer2 = L.layerGroup([andreeLayer3, tharpLayer2]);
+		const aLayer3 = L.layerGroup([andreeLayer4, haxbyLayer2]);
+		const aLayer4 = L.layerGroup([andreeLayer5, gmrtLayer2]);
+
+		const sLayer1 = L.layerGroup([meteorLayer3, tharpLayer3]);
+		const sLayer2 = L.layerGroup([meteorLayer4, haxbyLayer3]);
+		const sLayer3 = L.layerGroup([meteorLayer5, gmrtLayer3]);
+
+		const tLayer1 = L.layerGroup([tharpLayer4, haxbyLayer4]);
+		const tLayer2 = L.layerGroup([tharpLayer5, gmrtLayer4]);
+
+		const hLayer1 = L.layerGroup([haxbyLayer5, gmrtLayer5]);
+
+		/* LAYERS FOR THE PITMAN FZ MAP */
+		const pfzLayer = L.geoJson.ajax('data/segments_withDates_0_360.geojson', {
+			style: function(feature) {
+				return {
+					color: 'blue',
+					weight: 1,
+					opacity: 0.7,
+					dashArray: '5,2',
+					lineJoin: 'round'
+				};
+			},
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.Date;
+				layer.bindTooltip("Date: " + date, {sticky: true});
+				layer.on('mouseover', function(e){
+				  layer.setStyle({
+						color: 'yellow',
+						weight: 2,
+					});
+				});
+				layer.on('mouseout', function(e) {
+				  layer.setStyle({
+						color: 'blue',
+						weight: 1,
+					});
+				});
+			}
+		});
+
+		const pfzEmails1 = L.layerGroup();
+		const pfzEmails2 = L.layerGroup();
+		const pfzEmails3 = L.layerGroup();
+		const pfzEmails4 = L.layerGroup();
+		const pfzEmails5 = L.layerGroup();
+		const pfzEmails6 = L.layerGroup();
+		const pfzEmails7 = L.layerGroup();
+		const pfzEmails8 = L.layerGroup();
+		const pfzEmails9 = L.layerGroup();
+		const pfzEmails10 = L.layerGroup();
+		const pfzEmails11 = L.layerGroup();
+		const pfzEmails12 = L.layerGroup();
+
+		const pfzEmailOptions = {
+			// make a layer from points
+  		pointToLayer: function(feature, ll) {
+        // return a marker
+        return L.marker(ll, {
+          icon: L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      },
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.GMT_date;
+				const ctype = layer.feature.properties.type;
+				const ctext = layer.feature.properties.text;
+				const cid = layer.feature.properties.id;
+				var time = layer.feature.properties.GMT_time;
+				time = time.split(':'); // convert to array
+				// fetch
+				const hours = Number(time[0]);
+				const minutes = Number(time[1]);
+				const seconds = Number(time[2]);
+
+				// calculate
+				var timeValue;
+
+				if (hours > 0 && hours <= 12) {
+					timeValue= "" + hours;
+				} else if (hours > 12) {
+					timeValue= "" + (hours - 12);
+				} else if (hours == 0) {
+					timeValue= "12";
+				}
+
+				timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+				timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
+				timeValue += (hours >= 12) ? " PM" : " AM";  // get AM/PM
+				layer.bindPopup('<b>' + date + '<br>' + timeValue + '<b><br><br>' + ctext);
+				layer.on('mouseover', function(e) {
+					e.target.openPopup();
+					e.target.setIcon(new L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				layer.on('mouseout', function(e) {
+					this.setIcon(L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				if (cid == 1) {
+					pfzEmails1.addLayer(layer);
+				} if (cid == 2) {
+					pfzEmails2.addLayer(layer);
+				} if (cid == 3) {
+					pfzEmails3.addLayer(layer);
+				} if (cid == 4) {
+					pfzEmails4.addLayer(layer);
+				} if (cid == 5) {
+					pfzEmails5.addLayer(layer);
+				} if (cid == 6) {
+					pfzEmails6.addLayer(layer);
+				} if (cid == 7) {
+					pfzEmails7.addLayer(layer);
+				} if (cid == 8) {
+					pfzEmails8.addLayer(layer);
+				} if (cid == 9) {
+					pfzEmails9.addLayer(layer);
+				} if (cid == 10) {
+					pfzEmails10.addLayer(layer);
+				} if (cid == 11) {
+					pfzEmails11.addLayer(layer);
+				} if (cid == 12) {
+					pfzEmails12.addLayer(layer);
+				}
+			}
+		};
+
+		const pfzEmails = L.geoJson.ajax('data/PitmanFZemails.geojson', pfzEmailOptions);
+
+		/* LAYERS FOR THE EIRIK DRIFT MAP */
+		const eirikLayer = L.geoJson.ajax('data/Iceland_Voyage.geojson', {
+			style: function(feature) {
+				return {
+					color: 'blue',
+					weight: 1,
+					opacity: 0.7,
+					dashArray: '5,2',
+					lineJoin: 'round'
+				};
+			},
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.date;
+				layer.bindTooltip("Date: " + date, {sticky: true});
+				layer.on('mouseover', function(e){
+				  layer.setStyle({
+						color: 'yellow',
+						weight: 2,
+					});
+				});
+				layer.on('mouseout', function(e) {
+				  layer.setStyle({
+						color: 'blue',
+						weight: 1,
+					});
+				});
+			}
+		});
+
+		// empty layer groups to hold journal entry content
+		const eirikJournal1 = L.layerGroup();
+		const eirikJournal2 = L.layerGroup();
+		const eirikJournal3 = L.layerGroup();
+		const eirikJournal4 = L.layerGroup();
+		const eirikJournal5 = L.layerGroup();
+		const eirikJournal6 = L.layerGroup();
+		const eirikJournal7 = L.layerGroup();
+		const eirikJournal8 = L.layerGroup();
+		const eirikJournal9 = L.layerGroup();
+		const eirikJournal10 = L.layerGroup();
+		const eirikJournal11 = L.layerGroup();
+		const eirikJournal12 = L.layerGroup();
+		const eirikJournal13 = L.layerGroup();
+		const eirikJournal14 = L.layerGroup();
+		const eirikJournal15 = L.layerGroup();
+		const eirikJournal16 = L.layerGroup();
+		const eirikJournal17 = L.layerGroup();
+		const eirikJournal18 = L.layerGroup();
+		const eirikJournal19 = L.layerGroup();
+		const eirikJournal20 = L.layerGroup();
+		const eirikJournal21 = L.layerGroup();
+		const eirikJournal22 = L.layerGroup();
+		const eirikJournal23 = L.layerGroup();
+		const eirikJournal24 = L.layerGroup();
+		const eirikJournal25 = L.layerGroup();
+		const eirikJournal26 = L.layerGroup();
+		const eirikJournal27 = L.layerGroup();
+		const eirikJournal28 = L.layerGroup();
+		const eirikJournal29 = L.layerGroup();
+		const eirikJournal30 = L.layerGroup();
+		const eirikJournal31 = L.layerGroup();
+		const eirikJournal32 = L.layerGroup();
+		const eirikJournal33 = L.layerGroup();
+		const eirikJournal34 = L.layerGroup();
+		const eirikJournal35 = L.layerGroup();
+		const eirikJournal36 = L.layerGroup();
+		const eirikJournal37 = L.layerGroup();
+		const eirikJournal38 = L.layerGroup();
+
+		const eirikJournalOptions = {
+			// make a layer from points
+  		pointToLayer: function(feature, ll) {
+        // return a marker
+        return L.marker(ll, {
+          icon: L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      },
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.date;
+				const ctype = "journal entry";
+				const ctext = layer.feature.properties.text;
+				const cid = layer.feature.properties.id;
+				var time = layer.feature.properties.time;
+				time = time.split(':'); // convert to array
+				// fetch
+				const hours = Number(time[0]);
+				const minutes = Number(time[1]);
+				const seconds = Number(time[2]);
+
+				// calculate
+				var timeValue;
+
+				if (hours > 0 && hours <= 12) {
+					timeValue= "" + hours;
+				} else if (hours > 12) {
+					timeValue= "" + (hours - 12);
+				} else if (hours == 0) {
+					timeValue= "12";
+				}
+
+				timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+				timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
+				timeValue += (hours >= 12) ? " PM" : " AM";  // get AM/PM
+				layer.bindPopup('<b>' + date + '<br>' + timeValue + '<b><br><br>' + ctext);
+				layer.on('mouseover', function(e) {
+					e.target.openPopup();
+					e.target.setIcon(new L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				layer.on('mouseout', function(e) {
+					this.setIcon(L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				if (cid == 1) {
+					eirikJournal1.addLayer(layer);
+				} if (cid == 2) {
+					eirikJournal2.addLayer(layer);
+				} if (cid == 3) {
+					eirikJournal3.addLayer(layer);
+				} if (cid == 4) {
+					eirikJournal4.addLayer(layer);
+				} if (cid == 5) {
+					eirikJournal5.addLayer(layer);
+				} if (cid == 6) {
+					eirikJournal6.addLayer(layer);
+				} if (cid == 7) {
+					eirikJournal7.addLayer(layer);
+				} if (cid == 8) {
+					eirikJournal8.addLayer(layer);
+				} if (cid == 9) {
+					eirikJournal9.addLayer(layer);
+				} if (cid == 10) {
+					eirikJournal10.addLayer(layer);
+				} if (cid == 11) {
+					eirikJournal11.addLayer(layer);
+				} if (cid == 12) {
+					eirikJournal12.addLayer(layer);
+				} if (cid == 13) {
+					eirikJournal13.addLayer(layer);
+				} if (cid == 14) {
+					eirikJournal14.addLayer(layer);
+				} if (cid == 15) {
+					eirikJournal15.addLayer(layer);
+				} if (cid == 16) {
+					eirikJournal16.addLayer(layer);
+				} if (cid == 17) {
+					eirikJournal17.addLayer(layer);
+				} if (cid == 18) {
+					eirikJournal18.addLayer(layer);
+				} if (cid == 19) {
+					eirikJournal19.addLayer(layer);
+				} if (cid == 20) {
+					eirikJournal20.addLayer(layer);
+				} if (cid == 21) {
+					eirikJournal21.addLayer(layer);
+				} if (cid == 22) {
+					eirikJournal22.addLayer(layer);
+				} if (cid == 23) {
+					eirikJournal23.addLayer(layer);
+				} if (cid == 24) {
+					eirikJournal24.addLayer(layer);
+				} if (cid == 25) {
+					eirikJournal25.addLayer(layer);
+				} if (cid == 26) {
+					eirikJournal26.addLayer(layer);
+				} if (cid == 27) {
+					eirikJournal27.addLayer(layer);
+				} if (cid == 28) {
+					eirikJournal28.addLayer(layer);
+				} if (cid == 29) {
+					eirikJournal29.addLayer(layer);
+				} if (cid == 30) {
+					eirikJournal30.addLayer(layer);
+				} if (cid == 31) {
+					eirikJournal31.addLayer(layer);
+				} if (cid == 32) {
+					eirikJournal32.addLayer(layer);
+				} if (cid == 33) {
+					eirikJournal33.addLayer(layer);
+				} if (cid == 34) {
+					eirikJournal34.addLayer(layer);
+				} if (cid == 35) {
+					eirikJournal35.addLayer(layer);
+				} if (cid == 36) {
+					eirikJournal36.addLayer(layer);
+				} if (cid == 37) {
+					eirikJournal37.addLayer(layer);
+				} if (cid == 38) {
+					eirikJournal38.addLayer(layer);
+				}
+			}
+		};
+
+		const eirikJournals = L.geoJson.ajax('data/Iceland_Voyage_Journal.geojson', eirikJournalOptions);
+
+
+		const esriTerrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+			maxZoom: 13
+		});
+
+		const blaeu = L.tileLayer('tiles/blaeu_1630_tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+
+/*
+		const baseMaps = {
+      "Heezen-Tharp, 1977": tharpLayer,
+      "Contemporary GMRT": gmrtLayer
+    };
+*/
+    const layers = {
+			'seasat' : [seasat],
+			'mIslands' : [mIslands],
+			'blaeu' : [blaeu],
+			'mLayer1' : [mLayer1],
+			'mLayer2' : [mLayer2],
+			'mLayer3' : [mLayer3],
+			'mLayer4' : [mLayer4],
+			'mLayer5' : [mLayer5],
+			'aLayer1' : [aLayer1],
+			'aLayer2' : [aLayer2],
+			'aLayer3' : [aLayer3],
+			'aLayer4' : [aLayer4],
+			'sLayer1' : [sLayer1],
+			'sLayer2' : [sLayer2],
+			'sLayer3' : [sLayer3],
+			'tLayer1' : [tLayer1],
+			'tLayer2' : [tLayer2],
+			'hLayer1' : [hLayer1],
+			'pfzLayer' : [pfzLayer],
+			'pfzEmails' : [pfzEmails],
+			'pfzEmails1' : [pfzEmails1],
+			'pfzEmails2' : [pfzEmails2],
+			'pfzEmails3' : [pfzEmails3],
+			'pfzEmails4' : [pfzEmails4],
+			'pfzEmails5' : [pfzEmails5],
+			'pfzEmails6' : [pfzEmails6],
+			'pfzEmails7' : [pfzEmails7],
+			'pfzEmails8' : [pfzEmails8],
+			'pfzEmails9' : [pfzEmails9],
+			'pfzEmails10' : [pfzEmails10],
+			'pfzEmails11' : [pfzEmails11],
+			'pfzEmails12' : [pfzEmails12],
+			'eirikLayer' : [eirikLayer],
+			'eirikJournals' : [eirikJournals],
+			'eirikJournal1' : [eirikJournal1],
+			'eirikJournal2' : [eirikJournal2],
+			'eirikJournal3' : [eirikJournal3],
+			'eirikJournal4' : [eirikJournal4],
+			'eirikJournal5' : [eirikJournal5],
+			'eirikJournal6' : [eirikJournal6],
+			'eirikJournal7' : [eirikJournal7],
+			'eirikJournal8' : [eirikJournal8],
+			'eirikJournal9' : [eirikJournal9],
+			'eirikJournal10' : [eirikJournal10],
+			'eirikJournal11' : [eirikJournal11],
+			'eirikJournal12' : [eirikJournal12],
+			'eirikJournal13' : [eirikJournal13],
+			'eirikJournal14' : [eirikJournal14],
+			'eirikJournal15' : [eirikJournal15],
+			'eirikJournal16' : [eirikJournal16],
+			'eirikJournal17' : [eirikJournal17],
+			'eirikJournal18' : [eirikJournal18],
+			'eirikJournal19' : [eirikJournal19],
+			'eirikJournal20' : [eirikJournal20],
+			'eirikJournal21' : [eirikJournal21],
+			'eirikJournal22' : [eirikJournal22],
+			'eirikJournal23' : [eirikJournal23],
+			'eirikJournal24' : [eirikJournal24],
+			'eirikJournal25' : [eirikJournal25],
+			'eirikJournal26' : [eirikJournal26],
+			'eirikJournal27' : [eirikJournal27],
+			'eirikJournal28' : [eirikJournal28],
+			'eirikJournal29' : [eirikJournal29],
+			'eirikJournal30' : [eirikJournal30],
+			'eirikJournal31' : [eirikJournal31],
+			'eirikJournal32' : [eirikJournal32],
+			'eirikJournal33' : [eirikJournal33],
+			'eirikJournal34' : [eirikJournal34],
+			'eirikJournal35' : [eirikJournal35],
+			'eirikJournal36' : [eirikJournal36],
+			'eirikJournal37' : [eirikJournal37],
+			'eirikJournal38' : [eirikJournal38],
+			'gmrtLayer6' : [gmrtLayer6],
+			'Esri_NatGeoWorldMap' : [Esri_NatGeoWorldMap],
+			'CyclOSM' : [CyclOSM]
+    };
+
+		const baseTree = {
+			label: '<h6><b>Historic Seafloor Maps</b></h6>',
+			children: [
+					{
+							label: '<h6><b>1854 - Matthew Fontaine Maury</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Maury, 1854 vs. Andree, 1900</h6>', layer: mLayer1 },
+									{ label: '<h6>Maury, 1854 vs. Stocks, 1934</h6>', layer: mLayer2 },
+									{ label: '<h6>Maury, 1854 vs. Heezen-Tharp, 1977</h6>', layer: mLayer3 },
+									{ label: '<h6>Maury, 1854 vs. Haxby, 1983</h6>', layer: mLayer4 },
+									{ label: '<h6>Maury, 1854 vs. Contemporary GMRT</h6>', layer: mLayer5 },
+							]
+					},
+					{
+							label: '<h6><b>1900 - Richard Andree</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Andree, 1900 vs. Stocks, 1934</h6>', layer: aLayer1 },
+									{ label: '<h6>Andree, 1900 vs. Heezen-Tharp, 1977</h6>', layer: aLayer2 },
+									{ label: '<h6>Andree, 1900 vs. Haxby, 1983</h6>', layer: aLayer3 },
+									{ label: '<h6>Andree, 1900 vs. Contemporary GMRT</h6>', layer: aLayer4 },
+							]
+					},
+					{
+							label: '<h6><b>1934 - Theodor Stocks</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Stocks, 1934 vs. Heezen-Tharp, 1977</h6>', layer: sLayer1 },
+									{ label: '<h6>Stocks, 1934 vs. Haxby, 1983</h6>', layer: sLayer2 },
+									{ label: '<h6>Stocks, 1934 vs. Contemporary GMRT</h6>', layer: sLayer3 },
+							]
+					},
+					{
+							label: '<h6><b>1977 - Heezen-Tharp</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Heezen-Tharp, 1977 vs. Haxby, 1983</h6>', layer: tLayer1 },
+									{ label: '<h6>Heezen-Tharp, 1977 vs. Contemporary GMRT</h6>', layer: tLayer2 },
+							]
+					},
+					{
+							label: '<h6><b>1983 - Haxby</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Haxby, 1983 vs. Contemporary GMRT</h6>', layer: hLayer1 },
+							]
+					}
+			]
+		};
+
+    const scenes = {
+			homepage: {lat: 28.5, lng: -36, zoom: 4, layers: ['seasat'], name: "homepage"},
+			scene1a: {lat: 52, lng: -44, zoom: 4, layers: ['blaeu', 'mIslands'], name: "scene 1a"},
+			scene1b: {lat: -34.5, lng: -124, zoom: 5, layers: ['blaeu'], name: "scene 1b"},
+			//scene2: {lat: 28.5, lng: -36, zoom: 4, layers: ['mLayer1'], name: "scene 2"},
+			scene2a: {lat: 28.5, lng: -36, zoom: 4, layers: ['mLayer1'], name: "scene 2a"},
+			scene2b: {lat: 28.5, lng: -36, zoom: 4, layers: ['aLayer1'], name: "scene 2b"},
+			scene2c: {lat: 28.5, lng: -36, zoom: 4, layers: ['sLayer1'], name: "scene 2c"},
+			scene2d: {lat: 28.5, lng: -36, zoom: 4, layers: ['tLayer1'], name: "scene 2d"},
+			scene2e: {lat: 28.5, lng: -36, zoom: 4, layers: ['hLayer1'], name: "scene 2e"},
+			scene3: {lat: -60, lng: 172.620278, zoom: 4, layers: ['Esri_NatGeoWorldMap', 'pfzLayer', 'pfzEmails'], name: "scene 3"},
+			scene3a: {lat: -43.10, lng: 172.50, zoom: 6, layers: ['CyclOSM', 'pfzLayer', 'pfzEmails1'], name: "scene 3a"},
+			scene3b: {lat: -43.20, lng: 172.55, zoom: 8, layers: ['CyclOSM', 'pfzLayer', 'pfzEmails2'], name: "scene 3b"},
+			scene3c: {lat: -43.50, lng: 172.62, zoom: 11, layers: ['CyclOSM', 'pfzLayer', 'pfzEmails3'], name: "scene 3c"},
+			scene3d: {lat: -43.55, lng: 172.67, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails4'], name: "scene 3d"},
+			scene3e: {lat: -69.92231, lng: 205.13852, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails5'], name: "scene 3e"},
+			scene3f: {lat: -65.44117, lng: 191.18665, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails6'], name: "scene 3f"},
+			scene3g: {lat: -63.69325, lng: 188.08264, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails7'], name: "scene 3g"},
+			scene3h: {lat: -65.03482, lng: 190.3909, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails8'], name: "scene 3h"},
+			scene3i: {lat: -64.78252, lng: 190.17047, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails9'], name: "scene 3i"},
+			scene3j: {lat: -60.61742, lng: 177.1407, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails10'], name: "scene 3j"},
+			scene3k: {lat: -59.81476, lng: 176.38527, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails11'], name: "scene 3k"},
+			scene3l: {lat: -49.85465, lng: 173.85524, zoom: 5, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails12'], name: "scene 3l"},
+			scene4: {lat: 59.421839, lng: -42.500534, zoom: 5, layers: ['Esri_NatGeoWorldMap', 'eirikLayer', 'eirikJournals'], name: "scene 4"},
+			scene4a: {lat: 60.47366, lng: -22.743575, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal1'], name: "scene 4a"},
+			scene4b: {lat: 61.38741, lng: -22.143932, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal2'], name: "scene 4b"},
+			scene4c: {lat: 53.056777, lng: -33.529703, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal3'], name: "scene 4c"},
+			scene4d: {lat: 56.1101, lng: -40.306, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal4'], name: "scene 4d"},
+			scene4e: {lat: 57.8676, lng: -43.975, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal5'], name: "scene 4e"},
+			scene4f: {lat: 58.1083, lng: -43.9698, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal6'], name: "scene 4f"},
+			scene4g: {lat: 58.9098, lng: -47.5454, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal7'], name: "scene 4g"},
+			scene4h: {lat: 58.057, lng: -45.3008, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal8'], name: "scene 4h"},
+			scene4i: {lat: 58.1678, lng: -45.5118, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal9'], name: "scene 4i"},
+			scene4j: {lat: 58.5698, lng: -46.4064, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal10'], name: "scene 4j"},
+			scene4k: {lat: 57.8952, lng: -46.1239, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal11'], name: "scene 4k"},
+			scene4l: {lat: 57.7674, lng: -46.4892, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal12'], name: "scene 4l"},
+			scene4m: {lat: 57.8963, lng: -45.6127, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal13'], name: "scene 4m"},
+			scene4n: {lat: 58.6014, lng: -43.5592, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal14'], name: "scene 4n"},
+			scene4o: {lat: 58.5691, lng: -43.0337, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal15'], name: "scene 4o"},
+			scene4p: {lat: 58.6626, lng: -42.8384, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal16'], name: "scene 4p"},
+			scene4q: {lat: 58.4956, lng: -42.8346, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal17'], name: "scene 4q"},
+			scene4r: {lat: 58.6337, lng: -43.4555, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal18'], name: "scene 4r"},
+			scene4s: {lat: 58.8345, lng: -44.4866, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal19'], name: "scene 4s"},
+			scene4t: {lat: 58.6958, lng: -44.764, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal20'], name: "scene 4t"},
+			scene4u: {lat: 57.6368, lng: -47.3048, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal21'], name: "scene 4u"},
+			scene4v: {lat: 57.7192, lng: -47.8632, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal22'], name: "scene 4v"},
+			scene4w: {lat: 57.7085, lng: -47.9381, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal23'], name: "scene 4w"},
+			scene4x: {lat: 57.8797, lng: -48.1894, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal24'], name: "scene 4x"},
+			scene4y: {lat: 57.829, lng: -47.9097, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal25'], name: "scene 4y"},
+			scene4z: {lat: 58.1377, lng: -47.16, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal26'], name: "scene 4z"},
+			scene4aa: {lat: 58.2394, lng: -44.296, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal27'], name: "scene 4aa"},
+			scene4ab: {lat: 57.323, lng: -46.4886, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal28'], name: "scene 4ab"},
+			scene4ac: {lat: 57.5713, lng: -46.5218, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal29'], name: "scene 4ac"},
+			scene4ad: {lat: 58.3568, lng: -46.2396, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal30'], name: "scene 4ad"},
+			scene4ae: {lat: 58.3232, lng: -46.0484, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal31'], name: "scene 4ae"},
+			scene4af: {lat: 58.1114, lng: -45.3395, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal32'], name: "scene 4af"},
+			scene4ag: {lat: 58.2535, lng: -42.2585, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal33'], name: "scene 4ag"},
+			scene4ah: {lat: 60.4808, lng: -35.0352, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal34'], name: "scene 4ah"},
+			scene4ai: {lat: 63.8332, lng: -23.7774, zoom: 8, layers: ['gmrtLayer6', 'eirikLayer', 'eirikJournal35'], name: "scene 4ai"},
+			scene4aj: {lat: 64.0825, lng: -22.8903, zoom: 9, layers: ['CyclOSM', 'eirikLayer', 'eirikJournal36'], name: "scene 4aj"},
+			scene4ak: {lat: 64.173, lng: -22.2161, zoom: 10, layers: ['CyclOSM', 'eirikLayer', 'eirikJournal37'], name: "scene 4ak"},
+			scene4al: {lat: 64.1511, lng: -21.9362, zoom: 12, layers: ['CyclOSM', 'eirikLayer', 'eirikJournal38'], name: "scene 4al"}
+    };
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers: layers,
+        legend: false,
+        scale: false,
+        navwidget: true,
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            const map = L.map('map', {zoomControl: false, dragging: true, scrollWheelZoom: true, maxZoom: 14})/*.setView([28.5, -36], 4)*/;
+            map.doubleClickZoom.disable();
+
+						const controlCase1 = L.control.layers.tree(baseTree, null, {
+							position: 'topright',
+							collapsed: false,
+							//namedToggle: true,
+							//groupsCollapsable: true,
+  						//groupsExpandedClass: "glyphicon glyphicon-chevron-down",
+  						//groupsCollapsedClass: "glyphicon glyphicon-chevron-right",
+							//exclusiveGroups: ["<h6>1854 - Matthew Fontaine Maury</h6>","<h6>1900 - Richard Andree</h6>"]
+						}).addTo(map);
+
+						controlCase1.collapseTree(baseTree);
+
+						const layerControl1 = L.control.sideBySide([mauryLayer2, mauryLayer3, mauryLayer4, mauryLayer5, andreeLayer2, andreeLayer3, andreeLayer4, andreeLayer5, meteorLayer3, meteorLayer4, meteorLayer5, mauryLayer1, tharpLayer4, tharpLayer5, haxbyLayer5],[meteorLayer1, tharpLayer1, haxbyLayer1, gmrtLayer1, meteorLayer2, tharpLayer2, haxbyLayer2, gmrtLayer2, tharpLayer3, haxbyLayer3, gmrtLayer3, andreeLayer1, haxbyLayer4, gmrtLayer4, gmrtLayer5]);
+
+						const controls = [controlCase1, layerControl1];
+						const layers = [mLayer2, mLayer3, mLayer4, mLayer5, aLayer1, aLayer2, aLayer3, aLayer4, sLayer1, sLayer2, sLayer3, tLayer1, tLayer2, hLayer1];
+
+						// Add a function to check when scenes become visible (when they add a 'viewing' class)
+						$(function () {
+
+							map.removeControl(controlCase1);
+
+							map.on('moveend', function() {
+								if ($(".scene2a").hasClass("viewing")||$(".scene2b").hasClass("viewing")||$(".scene2c").hasClass("viewing")||$(".scene2d").hasClass("viewing")||$(".scene2e").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								/*
+								// if scene2a is visible
+								if ($(".scene2a").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								// if scene2b is visible
+								if ($(".scene2b").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								// if scene2c is visible
+								if ($(".scene2c").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								// if scene2d is visible
+								if ($(".scene2d").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								// if scene2e is visible
+								if ($(".scene2e").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								*/
+								/*
+								// if scene2 is visible
+								if ($(".scene2").hasClass("viewing")) {
+									controls.forEach(function(item) {map.addControl(item)});
+								} else {
+									controls.forEach(function(item) {map.removeControl(item)});
+									layers.forEach(function(item) {map.removeLayer(item)});
+								}
+								*/
+							});
+
+						});
+
+            miniMap = new L.Control.GlobeMiniMap({
+                marker:'#B51E1E',
+                position: 'bottomright'
+            }).addTo(map);
+
+            document.getElementsByClassName("leaflet-control-attribution")[0].style.visibility = "hidden";
+            return map;
+
+        }
+    });
+
+</script>
+</body>
+</html>

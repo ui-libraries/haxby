@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Haxby Project</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--stylesheets-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="css/storymap.css">
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/L.Control.Layers.Tree.css" crossorigin=""/>
+
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Courgette|Inconsolata|Titillium+Web|Fira+Sans+Condensed" />
+	<!--Bootstrap-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--leaflet-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="js/leaflet-d3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js" integrity="sha512-yocoLferfPbcwpCMr8v/B0AB4SWpJlouBwgE0D3ZHaiP1nuu5djZclFEIj9znuqghaZ3tdCMRrreLoM8km+jIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!--side by side comparison-->
+	<script src="js/leaflet-side-by-side.js"></script>
+
+	<!-- mini globle map -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+	<script src="js/globeminimap.js"></script>
+	<script src="js/storymap.js"></script>
+
+	<script src="js/jqcloud.js"></script>
+	<script src="js/L.Control.Layers.Tree.js"></script>
+
+	<script src="js/attrchange.js"></script>
+  <script src="js/attrchange_ext.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
+	<div class="container-fluid" >
+		<a class="navbar-brand" href="#">
+			<img src="img/favicon.ico" class="align-top" height="20px" align="left"> &nbsp;
+		</a>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Haxby Project</a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=homepage]').offset().top-$(window).scrollTop()-40);">Home Page</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Charting the Unknown<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1a]').offset().top-$(window).scrollTop()-40);">Mythical Islands</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1b]').offset().top-$(window).scrollTop()-40);">Sea Monsters</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Modern Seafloor Mapping</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Emails from the Pitman Fracture Zone, 1992<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3]').offset().top-$(window).scrollTop()-40);">The Course of the Ewing Cruise, EW9201</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3a]').offset().top-$(window).scrollTop()-40);">January 6, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3b]').offset().top-$(window).scrollTop()-40);">January 7, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3c]').offset().top-$(window).scrollTop()-40);">January 7, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3d]').offset().top-$(window).scrollTop()-40);">January 8, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3e]').offset().top-$(window).scrollTop()-40);">January 24, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3f]').offset().top-$(window).scrollTop()-40);">January 29, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3g]').offset().top-$(window).scrollTop()-40);">January 31, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3h]').offset().top-$(window).scrollTop()-40);">February 5, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3i]').offset().top-$(window).scrollTop()-40);">February 12, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3j]').offset().top-$(window).scrollTop()-40);">February 21, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3k]').offset().top-$(window).scrollTop()-40);">February 21, 1992</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3l]').offset().top-$(window).scrollTop()-40);">February 26, 1992</a>
+						</li>
+					</ul>
+				</li>
+<!--
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historical Seafloor Mapping<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene1]').offset().top-$(window).scrollTop()-40);">Scene 1</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene2]').offset().top-$(window).scrollTop()-40);">Scene 2</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=scene3]').offset().top-$(window).scrollTop()-40);">Scene 3</a>
+						</li>
+-->
+<!--
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case1]').offset().top-$(window).scrollTop()-40);">Content 2</a>
+						</li>
+-->
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div id="scenes" class="col-sm-6 col-md-4 main">
+<!--
+			<section class="homepage" data-scene="homepage">
+        <h2>Haxby Project Title</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+      </section>
+-->
+
+			<section id="scene" class="homepage" data-scene="homepage">
+				<h2>Haxby Project Title</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene1a" data-scene="scene1a">
+				<h2>Mythical Islands</h2>
+				<h3>SAMPLE TEXT: Produced in 1630, Willem Blaeu's "Nova Totius Terrarum Orbis Geographica ac Hydrographica Tabula" is emblematic of the way in which cartographers represented the unknown in maps of the era. The seas were unfamiliar and threatening places, inhabited by monstruous creatures and filled with unexplainable phenomena. For many centuries, European maps charted the locations of legendary islands in the North Atlantic, which were never found through subsequent exploration. Here, the islands of Brasil (here named Brazil), Mayda (here named As Maidas), and Bacalao (here called Terra de Bacalaos) are clearly visible, but are nowhere to be seen in modern maps of the Atlantic.</h3>
+				<br>
+				<h3>The location of Brasil was informed by previous maps and Irish myth, which claimed the island was intermittently visible from Ireland's western coast. To the south of it, Mayda was thought to be a crescent-shaped island west of Brittany. Both islands persisted on maps well into the 19th century. Some theories hold that Mayda and Bacalao were features of the North American coastline that early European explorers accidentally observed when lost. The Portuguese navigator, Joao Vaz Corte-Real was alleged to have explored the "Terra Nova do Bacalhau" shortly before Columbus landed at San Salvador in the present-day Bahamas. Some later hypothesized that Bacalao could have been present-day Newfoundland, as it appears in Blaeu's map.</h3>
+			</section>
+			<section id="scene" class="scene1b" data-scene="scene1b">
+				<h2>Sea Monsters</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene2" data-scene="scene2">
+        <h2>Mapping the Seafloor Through History</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3><br>
+				<h3>Click the radio control in the top right corner to compare important maps in the historical progression of Atlantic seafloor mapping.</h3>
+      </section>
+			<section id="scene" class="scene3" data-scene="scene3">
+				<h2>The Pitman Fracture Zone, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3a" data-scene="scene3a">
+				<h2>January 6, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3b" data-scene="scene3b">
+				<h2>January 7, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3c" data-scene="scene3c">
+				<h2>January 7, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3d" data-scene="scene3d">
+				<h2>January 8, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3e" data-scene="scene3e">
+				<h2>January 24, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3f" data-scene="scene3f">
+				<h2>January 29, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3g" data-scene="scene3g">
+				<h2>January 31, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3h" data-scene="scene3h">
+				<h2>February 5, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3i" data-scene="scene3i">
+				<h2>February 12, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3j" data-scene="scene3j">
+				<h2>February 21, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3k" data-scene="scene3k">
+				<h2>February 21, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+			<section id="scene" class="scene3l" data-scene="scene3l">
+				<h2>February 26, 1992</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+
+
+<!--
+			<section class="scene3" data-scene="scene3">
+				<h2>Scene 3</h2>
+				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+			</section>
+
+			<section class="scene4" data-scene="map_hex_case1">
+				<h2>Scene 4</h2>
+      </section>
+-->
+		</div>
+		<div id="map" class="col-sm-6 col-md-8 sidebar"></div>
+	</div>
+	<i class="animated zoomIn infinite glyphicon glyphicon-menu-down arrow-down arrow-down-custom2"></i>
+	<div class="progress-line"></div>
+	<ul class="navwidget text-center"></ul>
+
+</div>
+
+<script type="text/javascript">
+
+		const seasat = L.imageOverlay('img/Seasat.jpg', [[-50, 90], [70, -150]]);
+
+		const mIslands = L.geoJson.ajax('data/mythIslands.geojson', {
+			// make a layer from points
+  		pointToLayer: function(feature, ll) {
+        // return a marker
+        return L.marker(ll, {
+          icon: L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      },
+			onEachFeature: function(feature, layer) {
+				const island = layer.feature.properties.name;
+				layer.bindTooltip(island, {
+          sticky: true
+        });
+				layer.on('mouseover', function(e) {
+					e.target.setIcon(new L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				layer.on('mouseout', function(e) {
+					this.setIcon(L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+			}
+		});
+
+		/* LAYERS FOR THE COMPARATIVE MAPS */
+		const mauryLayer1 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer2 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer3 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer4 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+		const mauryLayer5 = L.tileLayer('tiles/maury-1854-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 1, maxZoom: 5});
+
+		const andreeLayer1 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer2 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer3 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer4 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+		const andreeLayer5 = L.tileLayer('tiles/andree-1900-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+
+		const meteorLayer1 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer2 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer3 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer4 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const meteorLayer5 = L.tileLayer('tiles/stocks-1934-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+
+		const tharpLayer1 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer2 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer3 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer4 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+		const tharpLayer5 = L.tileLayer('tiles/heezen-tharp-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 7});
+
+		const haxbyLayer1 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer2 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer3 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer4 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+		const haxbyLayer5 = L.tileLayer('tiles/haxby-1983-tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 4});
+
+		const gmrtLayer1 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer2 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer3 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer4 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+		const gmrtLayer5 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+
+		const gmrtLayer6 = L.tileLayer.wms('https://www.gmrt.org/services/mapserver/wms_merc?', {layers: 'topo'});
+
+		const mLayer1 = L.layerGroup([mauryLayer1, andreeLayer1]);
+		const mLayer2 = L.layerGroup([mauryLayer2, meteorLayer1]);
+		const mLayer3 = L.layerGroup([mauryLayer3, tharpLayer1]);
+		const mLayer4 = L.layerGroup([mauryLayer4, haxbyLayer1]);
+		const mLayer5 = L.layerGroup([mauryLayer5, gmrtLayer1]);
+
+		const aLayer1 = L.layerGroup([andreeLayer2, meteorLayer2])
+		const aLayer2 = L.layerGroup([andreeLayer3, tharpLayer2]);
+		const aLayer3 = L.layerGroup([andreeLayer4, haxbyLayer2]);
+		const aLayer4 = L.layerGroup([andreeLayer5, gmrtLayer2]);
+
+		const sLayer1 = L.layerGroup([meteorLayer3, tharpLayer3]);
+		const sLayer2 = L.layerGroup([meteorLayer4, haxbyLayer3]);
+		const sLayer3 = L.layerGroup([meteorLayer5, gmrtLayer3]);
+
+		const tLayer1 = L.layerGroup([tharpLayer4, haxbyLayer4]);
+		const tLayer2 = L.layerGroup([tharpLayer5, gmrtLayer4]);
+
+		const hLayer1 = L.layerGroup([haxbyLayer5, gmrtLayer5]);
+
+		/* LAYERS FOR THE PITMAN FZ MAP */
+		const pfzLayer = L.geoJson.ajax('data/segments_withDates_0_360.geojson', {
+			style: function(feature) {
+				return {
+					color: 'blue',
+					weight: 1,
+					opacity: 0.7,
+					dashArray: '5,2',
+					lineJoin: 'round'
+				};
+			},
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.Date;
+				layer.bindTooltip("Date: " + date, {sticky: true});
+				layer.on('mouseover', function(e){
+				  layer.setStyle({
+						color: 'yellow',
+						weight: 2,
+					});
+				});
+				layer.on('mouseout', function(e) {
+				  layer.setStyle({
+						color: 'blue',
+						weight: 1,
+					});
+				});
+			}
+		});
+
+		const pfzEmails1 = L.layerGroup();
+		const pfzEmails2 = L.layerGroup();
+		const pfzEmails3 = L.layerGroup();
+		const pfzEmails4 = L.layerGroup();
+		const pfzEmails5 = L.layerGroup();
+		const pfzEmails6 = L.layerGroup();
+		const pfzEmails7 = L.layerGroup();
+		const pfzEmails8 = L.layerGroup();
+		const pfzEmails9 = L.layerGroup();
+		const pfzEmails10 = L.layerGroup();
+		const pfzEmails11 = L.layerGroup();
+		const pfzEmails12 = L.layerGroup();
+
+		const pfzEmailOptions = {
+			// make a layer from points
+  		pointToLayer: function(feature, ll) {
+        // return a marker
+        return L.marker(ll, {
+          icon: L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      },
+			onEachFeature: function(feature, layer) {
+				const date = layer.feature.properties.GMT_date;
+				const ctype = layer.feature.properties.type;
+				const ctext = layer.feature.properties.text;
+				const cid = layer.feature.properties.id;
+				var time = layer.feature.properties.GMT_time;
+				time = time.split(':'); // convert to array
+				// fetch
+				const hours = Number(time[0]);
+				const minutes = Number(time[1]);
+				const seconds = Number(time[2]);
+
+				// calculate
+				var timeValue;
+
+				if (hours > 0 && hours <= 12) {
+					timeValue= "" + hours;
+				} else if (hours > 12) {
+					timeValue= "" + (hours - 12);
+				} else if (hours == 0) {
+					timeValue= "12";
+				}
+
+				timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+				timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
+				timeValue += (hours >= 12) ? " PM" : " AM";  // get AM/PM
+				layer.bindPopup('<b>' + date + '<br>' + timeValue + '<b><br><br>' + ctext);
+				layer.on('mouseover', function(e) {
+					e.target.openPopup();
+					e.target.setIcon(new L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				layer.on('mouseout', function(e) {
+					this.setIcon(L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          }));
+				});
+				if (cid == 1) {
+					pfzEmails1.addLayer(layer);
+				} if (cid == 2) {
+					pfzEmails2.addLayer(layer);
+				} if (cid == 3) {
+					pfzEmails3.addLayer(layer);
+				} if (cid == 4) {
+					pfzEmails4.addLayer(layer);
+				} if (cid == 5) {
+					pfzEmails5.addLayer(layer);
+				} if (cid == 6) {
+					pfzEmails6.addLayer(layer);
+				} if (cid == 7) {
+					pfzEmails7.addLayer(layer);
+				} if (cid == 8) {
+					pfzEmails8.addLayer(layer);
+				} if (cid == 9) {
+					pfzEmails9.addLayer(layer);
+				} if (cid == 10) {
+					pfzEmails10.addLayer(layer);
+				} if (cid == 11) {
+					pfzEmails11.addLayer(layer);
+				} if (cid == 12) {
+					pfzEmails12.addLayer(layer);
+				}
+			}
+		};
+
+		const pfzEmails = L.geoJson.ajax('data/PitmanFZemails.geojson', pfzEmailOptions);
+
+		const esriTerrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+			maxZoom: 13
+		});
+
+		const blaeu = L.tileLayer('tiles/blaeu_1630_tiles/{z}/{x}/{y}.png', {tms: true, opacity: 1.0, attribution: "", minZoom: 0, maxZoom: 5});
+
+/*
+		const baseMaps = {
+      "Heezen-Tharp, 1977": tharpLayer,
+      "Contemporary GMRT": gmrtLayer
+    };
+*/
+    const layers = {
+			'seasat' : [seasat],
+			'mIslands' : [mIslands],
+			'blaeu' : [blaeu],
+			'mLayer1' : [mLayer1],
+			'mLayer2' : [mLayer2],
+			'mLayer3' : [mLayer3],
+			'mLayer4' : [mLayer4],
+			'mLayer5' : [mLayer5],
+			'aLayer1' : [aLayer1],
+			'aLayer2' : [aLayer2],
+			'aLayer3' : [aLayer3],
+			'aLayer4' : [aLayer4],
+			'sLayer1' : [sLayer1],
+			'sLayer2' : [sLayer2],
+			'sLayer3' : [sLayer3],
+			'tLayer1' : [tLayer1],
+			'tLayer2' : [tLayer2],
+			'hLayer1' : [hLayer1],
+			'pfzLayer' : [pfzLayer],
+			'pfzEmails' : [pfzEmails],
+			'pfzEmails1' : [pfzEmails1],
+			'pfzEmails2' : [pfzEmails2],
+			'pfzEmails3' : [pfzEmails3],
+			'pfzEmails4' : [pfzEmails4],
+			'pfzEmails5' : [pfzEmails5],
+			'pfzEmails6' : [pfzEmails6],
+			'pfzEmails7' : [pfzEmails7],
+			'pfzEmails8' : [pfzEmails8],
+			'pfzEmails9' : [pfzEmails9],
+			'pfzEmails10' : [pfzEmails10],
+			'pfzEmails11' : [pfzEmails11],
+			'pfzEmails12' : [pfzEmails12],
+			'gmrtLayer6' : [gmrtLayer6],
+    };
+
+		const baseTree = {
+			label: '<h6><b>Historic Seafloor Maps</b></h6>',
+			children: [
+					{
+							label: '<h6><b>1854 - Matthew Fontaine Maury</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Maury, 1854 vs. Andree, 1900</h6>', layer: mLayer1 },
+									{ label: '<h6>Maury, 1854 vs. Stocks, 1934</h6>', layer: mLayer2 },
+									{ label: '<h6>Maury, 1854 vs. Heezen-Tharp, 1977</h6>', layer: mLayer3 },
+									{ label: '<h6>Maury, 1854 vs. Haxby, 1983</h6>', layer: mLayer4 },
+									{ label: '<h6>Maury, 1854 vs. Contemporary GMRT</h6>', layer: mLayer5 },
+							]
+					},
+					{
+							label: '<h6><b>1900 - Richard Andree</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Andree, 1900 vs. Stocks, 1934</h6>', layer: aLayer1 },
+									{ label: '<h6>Andree, 1900 vs. Heezen-Tharp, 1977</h6>', layer: aLayer2 },
+									{ label: '<h6>Andree, 1900 vs. Haxby, 1983</h6>', layer: aLayer3 },
+									{ label: '<h6>Andree, 1900 vs. Contemporary GMRT</h6>', layer: aLayer4 },
+							]
+					},
+					{
+							label: '<h6><b>1934 - Theodor Stocks</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Stocks, 1934 vs. Heezen-Tharp, 1977</h6>', layer: sLayer1 },
+									{ label: '<h6>Stocks, 1934 vs. Haxby, 1983</h6>', layer: sLayer2 },
+									{ label: '<h6>Stocks, 1934 vs. Contemporary GMRT</h6>', layer: sLayer3 },
+							]
+					},
+					{
+							label: '<h6><b>1977 - Heezen-Tharp</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Heezen-Tharp, 1977 vs. Haxby, 1983</h6>', layer: tLayer1 },
+									{ label: '<h6>Heezen-Tharp, 1977 vs. Contemporary GMRT</h6>', layer: tLayer2 },
+							]
+					},
+					{
+							label: '<h6><b>1983 - Haxby</b></h6>',
+							collapsed: true,
+							children: [
+									{ label: '<h6>Haxby, 1983 vs. Contemporary GMRT</h6>', layer: hLayer1 },
+							]
+					}
+			]
+		};
+
+    const scenes = {
+			homepage: {lat: 28.5, lng: -36, zoom: 4, layers: ['seasat'], name: "homepage"},
+			scene1a: {lat: 52, lng: -34, zoom: 5, layers: ['blaeu', 'mIslands'], name: "scene 1a"},
+			scene1b: {lat: -34.5, lng: -124, zoom: 5, layers: ['blaeu'], name: "scene 1b"},
+			scene2: {lat: 28.5, lng: -36, zoom: 4, layers: ['mLayer1'], name: "scene 2"},
+			scene3: {lat: -60, lng: 172.620278, zoom: 4, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails'], name: "scene 3"},
+			scene3a: {lat: -43.10, lng: 172.50, zoom: 6, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails1'], name: "scene 3a"},
+			scene3b: {lat: -43.20, lng: 172.55, zoom: 7, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails2'], name: "scene 3b"},
+			scene3c: {lat: -43.50, lng: 172.62, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails3'], name: "scene 3c"},
+			scene3d: {lat: -43.55, lng: 172.67, zoom: 9, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails4'], name: "scene 3d"},
+			scene3e: {lat: -69.92231, lng: 205.13852, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails5'], name: "scene 3e"},
+			scene3f: {lat: -65.44117, lng: 191.18665, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails6'], name: "scene 3f"},
+			scene3g: {lat: -63.69325, lng: 188.08264, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails7'], name: "scene 3g"},
+			scene3h: {lat: -65.03482, lng: 190.3909, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails8'], name: "scene 3h"},
+			scene3i: {lat: -64.78252, lng: 190.17047, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails9'], name: "scene 3i"},
+			scene3j: {lat: -60.61742, lng: 177.1407, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails10'], name: "scene 3j"},
+			scene3k: {lat: -59.81476, lng: 176.38527, zoom: 8, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails11'], name: "scene 3k"},
+			scene3l: {lat: -49.85465, lng: 173.85524, zoom: 5, layers: ['gmrtLayer6', 'pfzLayer', 'pfzEmails12'], name: "scene 3l"},
+    };
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers: layers,
+        legend: false,
+        scale: false,
+        navwidget: true,
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            const map = L.map('map', {zoomControl: false, dragging: true, scrollWheelZoom: true, maxZoom: 14})/*.setView([28.5, -36], 4)*/;
+            map.doubleClickZoom.disable();
+
+						const controlCase1 = L.control.layers.tree(baseTree, null, {
+							position: 'topright',
+							collapsed: false,
+							//namedToggle: true,
+							//groupsCollapsable: true,
+  						//groupsExpandedClass: "glyphicon glyphicon-chevron-down",
+  						//groupsCollapsedClass: "glyphicon glyphicon-chevron-right",
+							//exclusiveGroups: ["<h6>1854 - Matthew Fontaine Maury</h6>","<h6>1900 - Richard Andree</h6>"]
+						}).addTo(map);
+
+						controlCase1.collapseTree(baseTree);
+
+						const layerControl1 = L.control.sideBySide([mauryLayer2, mauryLayer3, mauryLayer4, mauryLayer5, andreeLayer2, andreeLayer3, andreeLayer4, andreeLayer5, meteorLayer3, meteorLayer4, meteorLayer5, mauryLayer1, tharpLayer4, tharpLayer5, haxbyLayer5],[meteorLayer1, tharpLayer1, haxbyLayer1, gmrtLayer1, meteorLayer2, tharpLayer2, haxbyLayer2, gmrtLayer2, tharpLayer3, haxbyLayer3, gmrtLayer3, andreeLayer1, haxbyLayer4, gmrtLayer4, gmrtLayer5]);
+
+						// Add a function to check when scenes become visible (when they add a 'viewing' class)
+						$(function () {
+
+							map.removeControl(controlCase1);
+
+							map.on('moveend', function() {
+								// if scene2 is visible
+								if ($(".scene2").hasClass("viewing")) {
+									// add the controls
+									map.addControl(controlCase1);
+									map.addControl(layerControl1);
+								} else {
+									// remove controls and unneeded layers that may have been added by user activity in scene2
+									map.removeControl(controlCase1);
+									map.removeControl(layerControl1);
+									map.removeLayer(mLayer2);
+									map.removeLayer(mLayer3);
+									map.removeLayer(mLayer4);
+									map.removeLayer(mLayer5);
+									map.removeLayer(aLayer1);
+									map.removeLayer(aLayer2);
+									map.removeLayer(aLayer3);
+									map.removeLayer(aLayer4);
+									map.removeLayer(sLayer1);
+									map.removeLayer(sLayer2);
+									map.removeLayer(sLayer3);
+									map.removeLayer(tLayer1);
+									map.removeLayer(tLayer2);
+									map.removeLayer(hLayer1);
+								}
+							});
+
+						});
+
+            miniMap = new L.Control.GlobeMiniMap({
+                marker:'#B51E1E',
+                position: 'bottomright'
+            }).addTo(map);
+
+            document.getElementsByClassName("leaflet-control-attribution")[0].style.visibility = "hidden";
+            return map;
+
+        }
+    });
+
+</script>
+</body>
+</html>
