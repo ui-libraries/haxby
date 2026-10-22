@@ -99,7 +99,7 @@
     margin-top: 20px;
     margin-right: 2px;
     padding-right: 12px;
-    min-width: 100 px !important;
+    min-width: 100px !important; /* A11Y: was '100 px' (invalid, ignored) */
     max-height: 300px;
     overflow: auto;
 }
@@ -114,7 +114,7 @@
 }
 */
 section p {
-    line-height: 24px;
+    line-height: 1.5; /* A11Y: relative so it scales with text size/spacing overrides (WCAG 1.4.12) */
 }
 
 body {
@@ -195,7 +195,7 @@ h5{
 
 h6{
   font-family: 'Playfair Display', serif;
-  font-size: 12px;
+  font-size: 14px; /* A11Y: was 12px */
   color: black;
   display: inline-block;
   margin-top: 0.0em;
@@ -511,6 +511,152 @@ p{
 .leaflet-control-layers {
   position: absolute;
   width: 300px;
+  /* A11Y: stop the 300px panel overflowing small/zoomed viewports (WCAG 1.4.10) */
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
   right: 0px;
   top: 32px
+}
+
+
+/* =====================================================================
+   ACCESSIBILITY ADDITIONS (WCAG 2.1 AA)
+   ===================================================================== */
+
+/* Visually hidden, still available to assistive technology.
+   (Same as Bootstrap 3's .sr-only; repeated so it still works if the CDN fails.) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip links (WCAG 2.4.1) */
+.skip-link {
+  position: fixed;
+  left: 8px;
+  top: -200px;
+  z-index: 3000;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #000000;
+  font-weight: bold;
+  font-size: 16px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  top: 8px;
+  color: #000000;
+  text-decoration: underline;
+}
+.skip-link + .skip-link:focus { left: 190px; }
+
+/* Visible keyboard focus (WCAG 2.4.7): blue ring with a white halo so it reads on
+   both the dark navbar and on light/dark map imagery. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+.leaflet-marker-icon:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+/* the map fills the viewport, so draw its ring inside the edge */
+#map:focus-visible,
+.leaflet-container:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 5px #ffffff;
+}
+/* programmatic focus targets (skip links / menu jumps) don't need a ring */
+main[tabindex]:focus, main[tabindex]:focus-visible,
+section[tabindex]:focus, section[tabindex]:focus-visible { outline: none; box-shadow: none; }
+
+/* Keep fixed navbar from covering focused / jumped-to content (WCAG 2.4.11).
+   40px matches the offset the old javascript: links used. */
+html { scroll-padding-top: 40px; }
+
+/* Headings and text that used to be styled via bare h2/h3 selectors.
+   Same look as before, but now semantically h1/h2/h3 + p. */
+.scene-title {
+  font-size: 25px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  font-family: 'Titillium Web', serif;
+}
+.scene-subtitle {
+  display: block;
+  font-size: 17px;
+  margin: 0 0 10px 0;
+  color: rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  font-family: 'Titillium Web', serif;
+}
+.scene-text {
+  display: block;
+  margin: 0 0 1em 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  font-family: 'Titillium Web', serif;
+}
+.scene-text:last-child { margin-bottom: 0; }
+
+/* Layer-tree control labels (were <h6>, which put headings inside a form control) */
+.layer-label {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: #000000;
+  margin: 0 0 0 0.75em;
+  font-style: italic;
+  font-weight: 400;
+}
+.layer-label-group { font-weight: bold; }
+
+/* Leaflet popups: the text box scrolls, so it must be reachable by keyboard and show focus */
+.leaflet-popup-content:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+}
+.leaflet-popup-close-button { min-width: 24px; min-height: 24px; } /* target size, WCAG 2.5.8 */
+
+/* Side-by-side comparison slider thumb */
+.leaflet-sbs-range:focus-visible { outline: 3px solid #005fcc; outline-offset: 4px; }
+
+/* Motion (WCAG 2.2.2 / 2.3.3): honour the OS "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .loader { animation: none !important; }
+}
+
+/* Windows High Contrast / forced colours */
+@media (forced-colors: active) {
+  .skip-link, .arrow-down { border: 2px solid CanvasText; }
+  .viewing, section { border: 1px solid CanvasText; }
 }

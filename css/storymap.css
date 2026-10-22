@@ -87,8 +87,10 @@ h3 {
     left: 0;
     z-index: 1005;
     border-radius: 5px;
-    background: rgba(115, 115, 115, 0.2);
-    color: rgba(63, 63, 63, 0.3);
+    /* A11Y: dots were rgba(63,63,63,.3) on rgba(115,115,115,.2) (~1.1:1).
+       Now a near-opaque light panel with dark dots (WCAG 1.4.11) */
+    background: rgba(255, 255, 255, 0.9);
+    color: #333333;
     padding:0;
     margin:0;
     font-size: 10px;
@@ -110,22 +112,26 @@ h3 {
     cursor: pointer;
 }
 
+/* A11Y: removed 'outline: 1px; outline-color: ...' (no outline-style, so it never
+   drew) and the low-contrast link colours; global focus ring is in main.css */
 .navwidget li a {
-    outline: 1px;
-    outline-color: rgba(63, 63, 63, 0.3);
     border: 0;
     padding: 4px;
     background-color: transparent;
 }
 
-.navwidget li a:visited,.navwidget li a:active, .navwidget li a:link  {color: rgba(62, 62, 62, 0.6); text-decoration:none}
-.navwidget li a:hover   {color: rgba(234, 234, 234, 0.68); text-decoration:none; font-size:12px}
+.navwidget li a:visited,.navwidget li a:active, .navwidget li a:link  {color: #333333; text-decoration:none}
+.navwidget li a:hover   {color: #B51E1E; text-decoration:none; font-size:12px}
+.navwidget:focus-within {opacity: 1 !important;}
 
 
 .navbar-nav > li > a, .navbar-brand {
     padding-top:6px !important;
     padding-bottom:0 !important;
-    height: 32px;
+    /* A11Y: was a fixed height:32px, which clipped wrapped link text in the
+       collapsed/mobile menu and when text is resized (WCAG 1.4.4, 1.4.10) */
+    min-height: 32px;
+    height: auto;
 }
 .navbar {min-height:32px !important;}
 
@@ -215,7 +221,12 @@ video {display: block;}
     }
 
     .viewing {
-        background: rgba(221, 221, 221, 0.6);
+        /* A11Y: was rgba(221,221,221,.6) at element opacity .8, which let dark map
+           tiles show through and dropped body text to ~3.9:1 (WCAG 1.4.3) */
+        background: rgba(238, 238, 238, 0.94);
+        opacity: 0.95;
+        filter: alpha(opacity=95);
+        -moz-opacity: 0.95;
     }
 }
 
@@ -235,20 +246,30 @@ section {
     opacity: 0;
 }
 
+/* A11Y: the arrow sits over the map, where a black glyph disappeared on dark tiles
+   and the hover colour (light grey) disappeared on light tiles. It now has its own
+   solid backing so contrast no longer depends on the map (WCAG 1.4.11). */
 .arrow-down {
     position:fixed;
     top:90%;
     left:2%;
     cursor: pointer;
     z-index:1005;
-    font-size: 40px;
-    color: rgba(0, 0, 0, 0.96);
-    text-shadow: 0 0 2px rgba(255, 255, 255, 0.95);
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a1a;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
 }
 
 .arrow-down:hover {
-    color: rgba(236, 236, 236, 0.8);
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.95);
+    background: #B51E1E;
+    color: #ffffff;
 }
 
 
@@ -256,14 +277,14 @@ section {
     position:fixed;
     cursor: pointer;
     font-size:16px;
-    color: rgba(169, 169, 169, 0.8);
+    color: #595959; /* A11Y: was rgba(169,169,169,.8) */
     z-index:1005;
     top: 20px;
     left:5px;
 }
 
 .btn:hover {
-    color: rgba(0, 0, 139, 0.8);
+    color: #00008b;
     text-decoration: none;
 }
 
